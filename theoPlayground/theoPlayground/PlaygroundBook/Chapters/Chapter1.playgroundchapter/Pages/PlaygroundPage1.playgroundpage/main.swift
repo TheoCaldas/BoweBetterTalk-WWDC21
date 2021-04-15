@@ -1,6 +1,6 @@
 /*:
  
- #From the inside
+ # From The Inside
  Just like Bowe, you may often find yourself with repressed feelings in your chest. It might be hard to release the heaviness from inside. Then, the best you can do is to **SHOUT** it all out!
  
  * Important:
