@@ -7,7 +7,6 @@
 
 import Foundation
 import AVFoundation
-import UIKit
 
 protocol MicDelegate{
     func receiveSignal()
@@ -19,10 +18,7 @@ class MicDetection {
     private var recorder: AVAudioRecorder!
     private var levelTimer = Timer()
     private var LEVEL_THRESHOLD: Float = 15.0
-    
-    private var progresso: Float = 0.0 //valor a ser atualizado quando o assopro é detectado (de 0 até limite)
-    private let limite: Float = 5.0 //define o quanto de assopro é preciso pra atingir um objetivo -> livre pra brincar e testar
-    
+        
     var delegate: MicDelegate?
     
     init(delegate: MicDelegate, volumeThreshold: Float?){

@@ -15,13 +15,18 @@ public class Main1: SKScene, MicDelegate {
     private var currentScreamAmount: Float = .zero
     private let screamAmountThreshold: Float = 5.0
     
-    private let label = SKLabelNode()
+    private var boweNode = SKSpriteNode()
+    private var micNode = SKSpriteNode()
+    private var progressBarNode = SKSpriteNode()
+    private var progressBarFillNode = SKSpriteNode()
     
     override public func didMove(to view: SKView) {
-        self.backgroundColor = .red
-        self.addChild(self.label)
-        self.label.zPosition = 1000
-        self.label.text = "\(self.currentScreamAmount)"
+        self.boweNode = self.childNode(withName: "//bowe") as! SKSpriteNode
+        self.micNode = self.childNode(withName: "//mic") as! SKSpriteNode
+        self.progressBarNode = self.childNode(withName: "//progressBar") as! SKSpriteNode
+        self.progressBarFillNode = self.childNode(withName: "//progressBarFill") as! SKSpriteNode
+        
+        Animator.animateBowe(node: self.boweNode, animation: .idle)
         
         self.mic = MicDetection(delegate: self, volumeThreshold: nil)
         self.startGame()
@@ -29,8 +34,6 @@ public class Main1: SKScene, MicDelegate {
     
     func receiveSignal() {
         self.currentScreamAmount += 0.1
-
-        self.label.text = "\(self.currentScreamAmount)"
 
         if self.currentScreamAmount >= self.screamAmountThreshold{
             self.currentScreamAmount = .zero
