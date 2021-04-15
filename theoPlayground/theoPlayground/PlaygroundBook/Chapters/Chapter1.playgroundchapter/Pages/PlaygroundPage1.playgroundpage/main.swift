@@ -19,7 +19,7 @@ import PlaygroundSupport
 import SpriteKit
 import BookCore
 //#-end-hidden-code
-var myObject : Objects = /*#-editable-code*/.macbook/*#-end-editable-code*/
+//var myObject : Objects = /*#-editable-code*/.macbook/*#-end-editable-code*/
 
 //#-hidden-code
 // Load the SKScene from 'GameScene.sks'
@@ -27,7 +27,7 @@ let sceneView = SKView(frame: CGRect(x:0 , y:0, width: 683, height: 1024))
 if let scene = Main1(fileNamed: "Main1") {
     // Set the scale mode
     scene.scaleMode = .aspectFit
-    scene.editableCode = myObject
+//    scene.editableCode = myObject
 
     // Present the scene
     sceneView.presentScene(scene)

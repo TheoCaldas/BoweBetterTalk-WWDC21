@@ -10,7 +10,6 @@
 		0D81E8F52624B9A20084A24C /* LiveView1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0D81E8F42624B9A20084A24C /* LiveView1.sks */; };
 		0D81E8FB2624B9F60084A24C /* LiveView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81E8FA2624B9F60084A24C /* LiveView1.swift */; };
 		0D81E9012624BAED0084A24C /* Main1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0D81E9002624BAED0084A24C /* Main1.sks */; };
-		0D81E9072624BB260084A24C /* Main1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81E9062624BB260084A24C /* Main1.swift */; };
 		0D81E90D2624BFDA0084A24C /* LiveView2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0D81E90C2624BFDA0084A24C /* LiveView2.sks */; };
 		0D81E9132624C0100084A24C /* LiveView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81E9122624C0100084A24C /* LiveView2.swift */; };
 		0D81E9192624C02C0084A24C /* Main2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0D81E9182624C02C0084A24C /* Main2.sks */; };
@@ -36,6 +35,8 @@
 		5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EF2F97E2054B6E400191409 /* ManifestPlist.strings */; };
 		5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2F9AD2054BBF300191409 /* LiveViewController.swift */; };
 		5EF2F9B72054E6FB00191409 /* Chapters in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5EF2F9B62054E6F900191409 /* Chapters */; };
+		E47AC01F262888CA00D60C44 /* MicDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC01E262888CA00D60C44 /* MicDetection.swift */; };
+		E47AC02A2628A68B00D60C44 /* Main1.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC0292628A68B00D60C44 /* Main1.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -147,7 +148,6 @@
 		0D81E8F42624B9A20084A24C /* LiveView1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LiveView1.sks; sourceTree = "<group>"; };
 		0D81E8FA2624B9F60084A24C /* LiveView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveView1.swift; sourceTree = "<group>"; };
 		0D81E9002624BAED0084A24C /* Main1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Main1.sks; sourceTree = "<group>"; };
-		0D81E9062624BB260084A24C /* Main1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main1.swift; sourceTree = "<group>"; };
 		0D81E90C2624BFDA0084A24C /* LiveView2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LiveView2.sks; sourceTree = "<group>"; };
 		0D81E9122624C0100084A24C /* LiveView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveView2.swift; sourceTree = "<group>"; };
 		0D81E9182624C02C0084A24C /* Main2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Main2.sks; sourceTree = "<group>"; };
@@ -185,6 +185,8 @@
 		5EF2F9AB2054BBF300191409 /* libBookCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBookCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF2F9AD2054BBF300191409 /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		5EF2F9B62054E6F900191409 /* Chapters */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Chapters; sourceTree = "<group>"; };
+		E47AC01E262888CA00D60C44 /* MicDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicDetection.swift; sourceTree = "<group>"; };
+		E47AC0292628A68B00D60C44 /* Main1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main1.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,7 +335,8 @@
 				5EF2F9AD2054BBF300191409 /* LiveViewController.swift */,
 				5E3196F22061DEA40077BBD7 /* LiveViewSupport.swift */,
 				0D81E8FA2624B9F60084A24C /* LiveView1.swift */,
-				0D81E9062624BB260084A24C /* Main1.swift */,
+				E47AC0292628A68B00D60C44 /* Main1.swift */,
+				E47AC01E262888CA00D60C44 /* MicDetection.swift */,
 				0D81E9122624C0100084A24C /* LiveView2.swift */,
 				0D81E91E2624C0E40084A24C /* Main2.swift */,
 				0D81E9342624CA3F0084A24C /* LiveView3.swift */,
@@ -666,12 +669,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D81E9072624BB260084A24C /* Main1.swift in Sources */,
+				E47AC02A2628A68B00D60C44 /* Main1.swift in Sources */,
 				0D81E9132624C0100084A24C /* LiveView2.swift in Sources */,
 				5E3196F32061DEA40077BBD7 /* LiveViewSupport.swift in Sources */,
 				0D81E91F2624C0E40084A24C /* Main2.swift in Sources */,
 				5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */,
 				0D81E9352624CA3F0084A24C /* LiveView3.swift in Sources */,
+				E47AC01F262888CA00D60C44 /* MicDetection.swift in Sources */,
 				0D81E9412624CAF40084A24C /* Main3.swift in Sources */,
 				0D81E8FB2624B9F60084A24C /* LiveView1.swift in Sources */,
 			);

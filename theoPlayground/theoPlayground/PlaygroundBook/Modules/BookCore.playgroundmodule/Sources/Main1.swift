@@ -2,126 +2,48 @@
 //  Main1.swift
 //  BookCore
 //
-//  Created by Eduarda Mello on 12/04/21.
+//  Created by Theo Necyk Agner Caldas on 15/04/21.
 //
 
 import PlaygroundSupport
 import SpriteKit
-import AVFoundation
+import Foundation
 
-public enum Objects : Int {
-    case macbook
-    case iPhone
-    case camera
-    case watch
-}
-
-public class Main1: SKScene {
-
-    public var background : SKSpriteNode!
-    public var tap : SKSpriteNode!
-    public var ellipse : SKSpriteNode!
+public class Main1: SKScene, MicDelegate {
     
-    public var editableCode : Objects = .macbook
-    public var objects : [Objects] = []
+    private var mic: MicDetection?
+    private var currentScreamAmount: Float = .zero
+    private let screamAmountThreshold: Float = 5.0
     
-    public var imgMacbook = SKSpriteNode(imageNamed: "mac")
-    public var imgiPhone = SKSpriteNode(imageNamed: "iphone")
-    public var imgCamera = SKSpriteNode(imageNamed: "camera")
-    public var imgWatch = SKSpriteNode(imageNamed: "watch")
+    private let label = SKLabelNode()
     
     override public func didMove(to view: SKView) {
+        self.backgroundColor = .red
+        self.addChild(self.label)
+        self.label.zPosition = 1000
+        self.label.text = "\(self.currentScreamAmount)"
         
-        tap = childNode(withName: "tap") as? SKSpriteNode
-        ellipse = childNode(withName: "ellipse") as? SKSpriteNode
-        
-        
-        imgMacbook.position = CGPoint(x: 0.5, y: -71.887)
-        imgiPhone.position = CGPoint(x: 0.5, y: -71.887)
-        imgCamera.position = CGPoint(x: 0.5, y: -71.887)
-        imgWatch.position = CGPoint(x: 0.5, y: -71.887)
-        
- 
-        
-        if case let .array(values) = PlaygroundKeyValueStore.current["ld"] {
-            for case let .integer(value) in values {
-                objects.append(Objects(rawValue: value)!)
-                
-            }
+        self.mic = MicDetection(delegate: self, volumeThreshold: nil)
+        self.startGame()
+    }
+    
+    func receiveSignal() {
+        self.currentScreamAmount += 0.1
+
+        self.label.text = "\(self.currentScreamAmount)"
+
+        if self.currentScreamAmount >= self.screamAmountThreshold{
+            self.currentScreamAmount = .zero
+            self.endGame()
         }
-        
     }
 
+    private func startGame(){
+        self.mic?.settupRecorder()
+        self.mic?.startRecorder()
+    }
 
-    
-    @objc public static override var supportsSecureCoding: Bool {
-        // SKNode conforms to NSSecureCoding, so any subclass going
-        // through the decoding process must support secure coding
-        get {
-            return true
-        }
-    }
-    
-    
-    func touchDown(atPoint pos : CGPoint) {
-        if ellipse.contains(pos) {
-            tap.alpha = 0.0
-            if editableCode == .macbook {
-                self.addChild(imgMacbook)
-            }
-            if editableCode == .iPhone {
-                self.addChild(imgiPhone)
-            }
-            if editableCode == .camera {
-                self.addChild(imgCamera)
-            }
-            if editableCode == .watch {
-                self.addChild(imgWatch)
-            }
-        
-        
-            
-            if !objects.contains(editableCode) {
-                objects.append(editableCode)
-                PlaygroundKeyValueStore.current["ld"] = .array(objects.map({PlaygroundValue.integer($0.rawValue)}))
-            
-            }
-            if objects.count == 4 {
-                PlaygroundPage.current.assessmentStatus = .pass(message: "Now that you saw all the objects go to the [next page](@next)")
-            }
-            
-        } else {
-            PlaygroundPage.current.assessmentStatus = .fail(hints: ["Click on tap to see the object!"], solution: nil)
-        }
-        
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-    }
-    
-    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { touchDown(atPoint: t.location(in: self)) }
-    }
-    
-    override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { touchMoved(toPoint: t.location(in: self)) }
-    }
-    
-    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { touchUp(atPoint: t.location(in: self)) }
-    }
-    
-    override public func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+    private func endGame(){
+        self.mic?.stopRecorder()
     }
 }
-
-
-
