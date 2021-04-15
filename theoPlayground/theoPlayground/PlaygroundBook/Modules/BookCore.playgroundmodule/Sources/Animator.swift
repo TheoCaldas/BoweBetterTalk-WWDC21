@@ -8,12 +8,12 @@
 import Foundation
 import SpriteKit
 
-private struct FrameDuration{
-    var frame: Int
-    var duration: TimeInterval
-}
-
 class Animator{
+    
+    private struct FrameDuration{
+        var frame: Int
+        var duration: TimeInterval
+    }
     
     public enum BoweAnimation{
         case idle
@@ -21,6 +21,7 @@ class Animator{
         case idleHappy
         case startingShout
         case shouting
+        case pauseShout
         case endingShout
         case talking
     }
@@ -39,7 +40,7 @@ class Animator{
         case down
     }
     
-    static func animateBowe(node: SKSpriteNode, animation: BoweAnimation){
+    static func animateBowe(node: SKSpriteNode, animation: BoweAnimation, completion: @escaping() -> Void){
         switch animation {
         case .idle:
             var orderedFrames = [FrameDuration]()
@@ -83,7 +84,36 @@ class Animator{
             
             let seq = SKAction.sequence(actions)
             node.removeAllActions()
-            node.run(seq)
+            node.run(SKAction.repeatForever(seq))
+            
+        case .startingShout:
+            var textures = [SKTexture]()
+            
+            for i in 0...3{
+                textures.append(SKTexture(imageNamed: String(format: "boweGritando%02d", i)))
+            }
+        
+            let animate = SKAction.animate(with: textures, timePerFrame: 0.1)
+            
+            node.removeAllActions()
+            node.run(animate, completion: completion)
+        case .shouting:
+            var textures = [SKTexture]()
+            
+            for i in 4...5{
+                textures.append(SKTexture(imageNamed: String(format: "boweGritando%02d", i)))
+            }
+        
+            let animate = SKAction.animate(with: textures, timePerFrame: 0.1)
+            
+            node.removeAllActions()
+            node.run(SKAction.repeatForever(animate))
+        case .pauseShout:
+            let texture = SKTexture(imageNamed: String(format: "boweGritando%02d", 6))
+
+            node.texture = texture
+            node.removeAllActions()
+
         default:
             print()
         }
