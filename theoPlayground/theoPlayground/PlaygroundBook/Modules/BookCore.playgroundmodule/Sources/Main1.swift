@@ -41,9 +41,11 @@ public class Main1: SKScene, MicDelegate {
     private func startGame(){
         self.mic?.settupRecorder()
         self.mic?.startRecorder()
+        PlaygroundPage.current.assessmentStatus = .fail(hints: ["Scream close to the device screen to help Bowe!"], solution: nil)
     }
 
     private func endGame(){
         self.mic?.stopRecorder()
+        PlaygroundPage.current.assessmentStatus = .pass(message: "Much Better! Please, go to the [next page](@next)")
     }
 }
