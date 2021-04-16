@@ -39,6 +39,12 @@
 		E47AC02A2628A68B00D60C44 /* Main1.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC0292628A68B00D60C44 /* Main1.swift */; };
 		E47AC0502628E4D300D60C44 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC04F2628E4D300D60C44 /* Animator.swift */; };
 		E47AC0832629108F00D60C44 /* TimeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC0822629108F00D60C44 /* TimeCounter.swift */; };
+		E47AC0922629CF4100D60C44 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC0912629CF4100D60C44 /* SoundManager.swift */; };
+		E47AC09E2629F58200D60C44 /* minigame2 Hint 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0992629F58200D60C44 /* minigame2 Hint 1.0.mp3 */; };
+		E47AC09F2629F58200D60C44 /* minigame2 BoweScream 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC09A2629F58200D60C44 /* minigame2 BoweScream 1.0.mp3 */; };
+		E47AC0A02629F58200D60C44 /* minigame2 music 1.3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC09B2629F58200D60C44 /* minigame2 music 1.3.mp3 */; };
+		E47AC0A12629F58200D60C44 /* minigame2 VoiceOver 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC09C2629F58200D60C44 /* minigame2 VoiceOver 1.0.mp3 */; };
+		E47AC0A22629F58200D60C44 /* minigame2 BoweHum 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC09D2629F58200D60C44 /* minigame2 BoweHum 1.0.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -191,6 +197,12 @@
 		E47AC0292628A68B00D60C44 /* Main1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main1.swift; sourceTree = "<group>"; };
 		E47AC04F2628E4D300D60C44 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		E47AC0822629108F00D60C44 /* TimeCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCounter.swift; sourceTree = "<group>"; };
+		E47AC0912629CF4100D60C44 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		E47AC0992629F58200D60C44 /* minigame2 Hint 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame2 Hint 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC09A2629F58200D60C44 /* minigame2 BoweScream 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame2 BoweScream 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC09B2629F58200D60C44 /* minigame2 music 1.3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame2 music 1.3.mp3"; sourceTree = "<group>"; };
+		E47AC09C2629F58200D60C44 /* minigame2 VoiceOver 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame2 VoiceOver 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC09D2629F58200D60C44 /* minigame2 BoweHum 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame2 BoweHum 1.0.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,6 +425,7 @@
 		5EF2F9792054B64800191409 /* PrivateResources */ = {
 			isa = PBXGroup;
 			children = (
+				E47AC0972629D27300D60C44 /* Audio Files */,
 				5EF2F97E2054B6E400191409 /* ManifestPlist.strings */,
 				5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */,
 				5E551EC42371FC3F00784365 /* Assets.xcassets */,
@@ -441,8 +454,29 @@
 				E47AC01E262888CA00D60C44 /* MicDetection.swift */,
 				E47AC04F2628E4D300D60C44 /* Animator.swift */,
 				E47AC0822629108F00D60C44 /* TimeCounter.swift */,
+				E47AC0912629CF4100D60C44 /* SoundManager.swift */,
 			);
 			path = Auxiliar;
+			sourceTree = "<group>";
+		};
+		E47AC0972629D27300D60C44 /* Audio Files */ = {
+			isa = PBXGroup;
+			children = (
+				E47AC0982629F58200D60C44 /* minigame 2 */,
+			);
+			path = "Audio Files";
+			sourceTree = "<group>";
+		};
+		E47AC0982629F58200D60C44 /* minigame 2 */ = {
+			isa = PBXGroup;
+			children = (
+				E47AC0992629F58200D60C44 /* minigame2 Hint 1.0.mp3 */,
+				E47AC09A2629F58200D60C44 /* minigame2 BoweScream 1.0.mp3 */,
+				E47AC09B2629F58200D60C44 /* minigame2 music 1.3.mp3 */,
+				E47AC09C2629F58200D60C44 /* minigame2 VoiceOver 1.0.mp3 */,
+				E47AC09D2629F58200D60C44 /* minigame2 BoweHum 1.0.mp3 */,
+			);
+			path = "minigame 2";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -596,9 +630,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E47AC09F2629F58200D60C44 /* minigame2 BoweScream 1.0.mp3 in Resources */,
+				E47AC0A02629F58200D60C44 /* minigame2 music 1.3.mp3 in Resources */,
 				0D81E92F2624CA0E0084A24C /* LiveView3.sks in Resources */,
 				0D81E8F52624B9A20084A24C /* LiveView1.sks in Resources */,
+				E47AC0A22629F58200D60C44 /* minigame2 BoweHum 1.0.mp3 in Resources */,
 				5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */,
+				E47AC0A12629F58200D60C44 /* minigame2 VoiceOver 1.0.mp3 in Resources */,
+				E47AC09E2629F58200D60C44 /* minigame2 Hint 1.0.mp3 in Resources */,
 				0D81E9012624BAED0084A24C /* Main1.sks in Resources */,
 				0D81E90D2624BFDA0084A24C /* LiveView2.sks in Resources */,
 				0D81E9192624C02C0084A24C /* Main2.sks in Resources */,
@@ -688,6 +727,7 @@
 				0D81E9132624C0100084A24C /* LiveView2.swift in Sources */,
 				5E3196F32061DEA40077BBD7 /* LiveViewSupport.swift in Sources */,
 				E47AC0832629108F00D60C44 /* TimeCounter.swift in Sources */,
+				E47AC0922629CF4100D60C44 /* SoundManager.swift in Sources */,
 				0D81E91F2624C0E40084A24C /* Main2.swift in Sources */,
 				5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */,
 				0D81E9352624CA3F0084A24C /* LiveView3.swift in Sources */,

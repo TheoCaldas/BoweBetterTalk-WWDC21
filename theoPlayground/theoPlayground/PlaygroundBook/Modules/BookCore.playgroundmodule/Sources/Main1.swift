@@ -42,9 +42,8 @@ public class Main1: SKScene, MicDelegate {
         self.hideUI()
                 
         timeBeforeFirstDetection.start()
-        
         Animator.animateBowe(node: self.boweNode, animation: .idleSad){}
-        
+        SoundManager.sharedInstance().playBackgroundMusic(.minigame2, mustLoop: false)
         self.mic = MicDetection(delegate: self, volumeThreshold: nil)
     }
     
