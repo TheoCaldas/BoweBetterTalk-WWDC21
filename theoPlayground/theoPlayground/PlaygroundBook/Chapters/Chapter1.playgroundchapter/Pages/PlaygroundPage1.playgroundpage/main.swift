@@ -7,8 +7,10 @@
  Although it feels good to spill out these awful thoughts, it doesn't solve any problem. Your inner struggle will only vanish through communication. When possible, try talking about the things that bother you with friends, family or any person you trust and feel comfortable with.
  
  
-Please, hit the "Run" button to help Bowe!\
-(Use Full Screen Mode for a better experience)\
+Please, hit "Run My Code" to help Bowe!
+  * Callout(Use Full Screen Mode for a better experience):
+    Grab the slider in between the page and the Live View and move it by the page direction.
+ 
 When you’re done, go to [next page](@next)!
 */
 //#-hidden-code
