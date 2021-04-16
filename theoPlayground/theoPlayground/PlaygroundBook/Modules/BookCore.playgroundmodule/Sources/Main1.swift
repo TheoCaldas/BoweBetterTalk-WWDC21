@@ -13,7 +13,7 @@ public class Main1: SKScene, MicDelegate {
     
     enum PlayingState{
         case notStarted //opens scene
-        case started //after timer
+        case started //end of instruction
         case playing //first detection
         case finished //target reached
     }

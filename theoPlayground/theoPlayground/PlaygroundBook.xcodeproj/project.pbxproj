@@ -336,13 +336,11 @@
 		5E70679D23678DA00094BDEF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				E47AC08C2629CA1E00D60C44 /* Auxiliar */,
 				5EF2F9AD2054BBF300191409 /* LiveViewController.swift */,
 				5E3196F22061DEA40077BBD7 /* LiveViewSupport.swift */,
 				0D81E8FA2624B9F60084A24C /* LiveView1.swift */,
 				E47AC0292628A68B00D60C44 /* Main1.swift */,
-				E47AC01E262888CA00D60C44 /* MicDetection.swift */,
-				E47AC04F2628E4D300D60C44 /* Animator.swift */,
-				E47AC0822629108F00D60C44 /* TimeCounter.swift */,
 				0D81E9122624C0100084A24C /* LiveView2.swift */,
 				0D81E91E2624C0E40084A24C /* Main2.swift */,
 				0D81E9342624CA3F0084A24C /* LiveView3.swift */,
@@ -435,6 +433,16 @@
 				5E6F7E582367B51E008CC191 /* UserModules */,
 			);
 			name = "Supporting Content";
+			sourceTree = "<group>";
+		};
+		E47AC08C2629CA1E00D60C44 /* Auxiliar */ = {
+			isa = PBXGroup;
+			children = (
+				E47AC01E262888CA00D60C44 /* MicDetection.swift */,
+				E47AC04F2628E4D300D60C44 /* Animator.swift */,
+				E47AC0822629108F00D60C44 /* TimeCounter.swift */,
+			);
+			path = Auxiliar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
