@@ -68,16 +68,7 @@ class Animator{
             for i in 0...7{
                 textures.append(SKTexture(imageNamed: String(format: "boweRespirando%02d", i)))
             }
-            
-            //otimizar?
-            
-//            var orderedTextures = [SKTexture]()
-//            for i in 0...orderedFrames.count-1{
-//                if i == 0{
-//                    orderedTextures.append()
-//                }
-//            }
-        
+                
             for frameDuration in orderedFrames{
                 actions.append(SKAction.animate(with: [textures[frameDuration.frame-1]], timePerFrame: frameDuration.duration))
             }
@@ -158,8 +149,66 @@ class Animator{
             let seq = SKAction.sequence(actions)
             node.removeAllActions()
             node.run(SKAction.repeatForever(seq))
-        default:
-            print()
+        case .idleSad:
+            var orderedFrames = [FrameDuration]()
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 2, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 3, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 4, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 3, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 2, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 5, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 6, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 7, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 6, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 5, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.5))
+            orderedFrames.append(FrameDuration(frame: 8, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 8, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            
+            var textures = [SKTexture]()
+            var actions = [SKAction]()
+
+            for i in 0...7{
+                textures.append(SKTexture(imageNamed: String(format: "boweRespirandoTriste%02d", i)))
+            }
+        
+            for frameDuration in orderedFrames{
+                actions.append(SKAction.animate(with: [textures[frameDuration.frame-1]], timePerFrame: frameDuration.duration))
+            }
+            
+            let seq = SKAction.sequence(actions)
+            node.removeAllActions()
+            node.run(SKAction.repeatForever(seq))
+        case .talking:
+            var orderedFrames = [FrameDuration]()
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 2, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 3, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 4, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 3, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 4, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 3, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 2, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            
+            var textures = [SKTexture]()
+            var actions = [SKAction]()
+
+            for i in 0...3{
+                textures.append(SKTexture(imageNamed: String(format: "boweFalando%02d", i)))
+            }
+        
+            for frameDuration in orderedFrames{
+                actions.append(SKAction.animate(with: [textures[frameDuration.frame-1]], timePerFrame: frameDuration.duration))
+            }
+            
+            let seq = SKAction.sequence(actions)
+            node.removeAllActions()
+            node.run(seq, completion: completion)
         }
     }
     

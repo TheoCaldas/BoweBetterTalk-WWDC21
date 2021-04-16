@@ -53,7 +53,7 @@ public class Main1: SKScene, MicDelegate {
         
         timeBeforeFirstDetection.start()
         
-        Animator.animateBowe(node: self.boweNode, animation: .idle){}
+        Animator.animateBowe(node: self.boweNode, animation: .idleSad){}
         
         self.mic = MicDetection(delegate: self, volumeThreshold: nil)
     }
