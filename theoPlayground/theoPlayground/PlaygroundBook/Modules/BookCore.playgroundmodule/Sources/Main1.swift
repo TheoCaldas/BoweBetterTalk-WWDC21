@@ -22,8 +22,6 @@ public class Main1: SKScene, MicDelegate {
     private var currentScreamAmount: Float = .zero
     private let screamAmountTarget: Float = 15.0
     
-//    private var hasDetected = false
-//    private var finishDetecting = false
     private var playingState: PlayingState = .notStarted
     private var timeSinceLastDetection = TimeCounter()
     private var timeBeforeFirstDetection = TimeCounter()
@@ -33,8 +31,6 @@ public class Main1: SKScene, MicDelegate {
     private var progressBarNode = SKSpriteNode()
     private var progressBarFillNode = SKSpriteNode()
     
-    private var labelNode = SKLabelNode()
-    
     private var hintHasAppeared = false
     
     override public func didMove(to view: SKView) {
@@ -42,15 +38,9 @@ public class Main1: SKScene, MicDelegate {
         self.micNode = self.childNode(withName: "//mic") as! SKSpriteNode
         self.progressBarNode = self.childNode(withName: "//progressBar") as! SKSpriteNode
         self.progressBarFillNode = self.childNode(withName: "//progressBarFill") as! SKSpriteNode
-        
-        self.micNode.isHidden = true
-        
-        self.addChild(self.labelNode)
-        self.labelNode.zPosition = 100
-        self.labelNode.fontSize = 100
-        self.labelNode.position = CGPoint(x: -400, y: -400)
-        self.labelNode.text = "\(currentScreamAmount)"
-        
+        self.progressBarFillNode.xScale = .zero
+        self.hideUI()
+                
         timeBeforeFirstDetection.start()
         
         Animator.animateBowe(node: self.boweNode, animation: .idleSad){}
@@ -60,16 +50,19 @@ public class Main1: SKScene, MicDelegate {
     
     override public func update(_ elapsedTime: TimeInterval) {
         if self.playingState == .notStarted{
-            if self.timeBeforeFirstDetection.getTime() >= 10.0{
+            if self.timeBeforeFirstDetection.getTime() >= 5.0{
                 self.startGame()
             }
         }
         if self.playingState == .started{
-            if self.timeBeforeFirstDetection.getTime() >= 15.0{
+            if self.timeBeforeFirstDetection.getTime() >= 10.0{
                 self.showHint()
             }
         }
         if self.playingState == .playing{
+            let progress = currentScreamAmount/screamAmountTarget
+            self.progressBarFillNode.run(SKAction.scaleX(to: CGFloat(progress), duration: 0.02))
+            
             if self.timeSinceLastDetection.getTime() >= 0.1 {
                 Animator.animateBowe(node: self.boweNode, animation: .pauseShout){}
             }
@@ -82,8 +75,6 @@ public class Main1: SKScene, MicDelegate {
     
     func receiveSignal() {
         self.currentScreamAmount += 0.1
-        
-        self.labelNode.text = "\(currentScreamAmount)"
         
         if self.playingState == .started{
             self.playingState = .playing
@@ -111,17 +102,17 @@ public class Main1: SKScene, MicDelegate {
         self.playingState = .started
         self.mic?.settupRecorder()
         self.mic?.startRecorder()
-        self.micNode.isHidden = false
+        self.showUI()
     }
     
     private func endGame(){
-        self.micNode.isHidden = true
         self.playingState = .finished
         self.mic?.stopRecorder()
         Animator.animateBowe(node: self.boweNode, animation: .endingShout){
             PlaygroundPage.current.assessmentStatus = .pass(message: "Much Better! Please, go to the [next page](@next)")
             Animator.animateBowe(node: self.boweNode, animation: .idleHappy){}
         }
+        self.hideUI()
     }
     
     private func showHint(){
@@ -129,6 +120,17 @@ public class Main1: SKScene, MicDelegate {
             self.hintHasAppeared = true
             PlaygroundPage.current.assessmentStatus = .fail(hints: ["Scream as loud as you can in front of the device!"], solution: nil)
         }
-        
+    }
+    
+    private func hideUI(){
+        self.progressBarFillNode.isHidden = true
+        self.progressBarNode.isHidden = true
+        self.micNode.isHidden = true
+    }
+    
+    private func showUI(){
+        self.progressBarFillNode.isHidden = false
+        self.progressBarNode.isHidden = false
+        self.micNode.isHidden = false
     }
 }
