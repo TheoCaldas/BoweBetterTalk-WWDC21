@@ -38,6 +38,7 @@
 		E47AC01F262888CA00D60C44 /* MicDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC01E262888CA00D60C44 /* MicDetection.swift */; };
 		E47AC02A2628A68B00D60C44 /* Main1.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC0292628A68B00D60C44 /* Main1.swift */; };
 		E47AC0502628E4D300D60C44 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC04F2628E4D300D60C44 /* Animator.swift */; };
+		E47AC0832629108F00D60C44 /* TimeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC0822629108F00D60C44 /* TimeCounter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -189,6 +190,7 @@
 		E47AC01E262888CA00D60C44 /* MicDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicDetection.swift; sourceTree = "<group>"; };
 		E47AC0292628A68B00D60C44 /* Main1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main1.swift; sourceTree = "<group>"; };
 		E47AC04F2628E4D300D60C44 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		E47AC0822629108F00D60C44 /* TimeCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCounter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +342,7 @@
 				E47AC0292628A68B00D60C44 /* Main1.swift */,
 				E47AC01E262888CA00D60C44 /* MicDetection.swift */,
 				E47AC04F2628E4D300D60C44 /* Animator.swift */,
+				E47AC0822629108F00D60C44 /* TimeCounter.swift */,
 				0D81E9122624C0100084A24C /* LiveView2.swift */,
 				0D81E91E2624C0E40084A24C /* Main2.swift */,
 				0D81E9342624CA3F0084A24C /* LiveView3.swift */,
@@ -676,6 +679,7 @@
 				E47AC02A2628A68B00D60C44 /* Main1.swift in Sources */,
 				0D81E9132624C0100084A24C /* LiveView2.swift in Sources */,
 				5E3196F32061DEA40077BBD7 /* LiveViewSupport.swift in Sources */,
+				E47AC0832629108F00D60C44 /* TimeCounter.swift in Sources */,
 				0D81E91F2624C0E40084A24C /* Main2.swift in Sources */,
 				5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */,
 				0D81E9352624CA3F0084A24C /* LiveView3.swift in Sources */,

@@ -113,7 +113,51 @@ class Animator{
 
             node.texture = texture
             node.removeAllActions()
+        case .endingShout:
+            var textures = [SKTexture]()
+            
+            for i in 7...10{
+                textures.append(SKTexture(imageNamed: String(format: "boweGritando%02d", i)))
+            }
+        
+            let animate = SKAction.animate(with: textures, timePerFrame: 0.1)
+            
+            node.removeAllActions()
+            node.run(animate, completion: completion)
+        case .idleHappy:
+            var orderedFrames = [FrameDuration]()
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 2, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 3, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 4, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 3, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 2, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 5, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 6, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 7, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 6, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 5, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.5))
+            orderedFrames.append(FrameDuration(frame: 8, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 8, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            
+            var textures = [SKTexture]()
+            var actions = [SKAction]()
 
+            for i in 0...7{
+                textures.append(SKTexture(imageNamed: String(format: "boweRespirandoFeliz%02d", i)))
+            }
+        
+            for frameDuration in orderedFrames{
+                actions.append(SKAction.animate(with: [textures[frameDuration.frame-1]], timePerFrame: frameDuration.duration))
+            }
+            
+            let seq = SKAction.sequence(actions)
+            node.removeAllActions()
+            node.run(SKAction.repeatForever(seq))
         default:
             print()
         }
