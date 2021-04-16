@@ -32,6 +32,7 @@ public class Main1: SKScene, MicDelegate {
     private var progressBarFillNode = SKSpriteNode()
     
     private var hintHasAppeared = false
+    private var screamWasInterrupted = false
     
     override public func didMove(to view: SKView) {
         self.boweNode = self.childNode(withName: "//bowe") as! SKSpriteNode
@@ -49,12 +50,15 @@ public class Main1: SKScene, MicDelegate {
     
     override public func update(_ elapsedTime: TimeInterval) {
         if self.playingState == .notStarted{
-            if self.timeBeforeFirstDetection.getTime() >= 5.0{
+            if self.timeBeforeFirstDetection.getTime() >= 3.0 && self.timeBeforeFirstDetection.getTime() < 4.0{
+                SoundManager.sharedInstance().playSoundEffect(.minigame2VoiceOver, mustLoop: false)
+            }
+            if self.timeBeforeFirstDetection.getTime() >= 10.0{
                 self.startGame()
             }
         }
         if self.playingState == .started{
-            if self.timeBeforeFirstDetection.getTime() >= 10.0{
+            if self.timeBeforeFirstDetection.getTime() >= 15.0{
                 self.showHint()
             }
         }
@@ -63,7 +67,7 @@ public class Main1: SKScene, MicDelegate {
             self.progressBarFillNode.run(SKAction.scaleX(to: CGFloat(progress), duration: 0.02))
             
             if self.timeSinceLastDetection.getTime() >= 0.1 {
-                Animator.animateBowe(node: self.boweNode, animation: .pauseShout){}
+                self.interruptScream()
             }
             if self.timeSinceLastDetection.getTime() >= 5.0{
                 self.showHint()
@@ -79,17 +83,20 @@ public class Main1: SKScene, MicDelegate {
             self.playingState = .playing
             self.timeSinceLastDetection.start()
             self.timeBeforeFirstDetection.stop()
+            SoundManager.sharedInstance().playSoundEffect(.boweScream, mustLoop: false)
             Animator.animateBowe(node: self.boweNode, animation: .startingShout){
                 Animator.animateBowe(node: self.boweNode, animation: .shouting){}
             }
         }
         else if self.playingState == .playing{
-            if self.timeSinceLastDetection.getTime() >= 0.1{
+            if self.timeSinceLastDetection.getTime() >= 0.2{
+                SoundManager.sharedInstance().playSoundEffect(.boweScream, mustLoop: false)
                 Animator.animateBowe(node: self.boweNode, animation: .shouting){}
             }
         }
         
         self.timeSinceLastDetection.reset()
+        self.screamWasInterrupted = false
         
         if self.currentScreamAmount >= self.screamAmountTarget{
             self.currentScreamAmount = .zero
@@ -112,12 +119,22 @@ public class Main1: SKScene, MicDelegate {
             Animator.animateBowe(node: self.boweNode, animation: .idleHappy){}
         }
         self.hideUI()
+        SoundManager.sharedInstance().stopSoundEffect(.boweScream)
     }
     
     private func showHint(){
         if !self.hintHasAppeared{
             self.hintHasAppeared = true
+            SoundManager.sharedInstance().playSoundEffect(.hint, mustLoop: false)
             PlaygroundPage.current.assessmentStatus = .fail(hints: ["Scream as loud as you can in front of the device!"], solution: nil)
+        }
+    }
+    
+    private func interruptScream(){
+        if !self.screamWasInterrupted{
+            self.screamWasInterrupted = true
+            SoundManager.sharedInstance().stopSoundEffect(.boweScream)
+            Animator.animateBowe(node: self.boweNode, animation: .pauseShout){}
         }
     }
     

@@ -152,10 +152,23 @@ public class SoundManager {
     }
     
     public func stopSoundEffect(_ effect: SFX){
+        let fadeDuration: TimeInterval = 0.1
+        if let audioPlayer = self.sfxPlayerDict[effect] as? AVAudioPlayer{
+            audioPlayer.setVolume(0, fadeDuration: fadeDuration)
+            let _ = Timer.scheduledTimer(timeInterval: fadeDuration, target: self, selector: #selector(stopAudioPlayer(sender:)), userInfo: ["effect": effect], repeats: false)
+        }
+    }
+    
+    
+    @objc private func stopAudioPlayer(sender: Timer){
+        let userInfo = sender.userInfo as! Dictionary<String, AnyObject>
+        let effect = userInfo["effect"] as! SFX
         if let audioPlayer = self.sfxPlayerDict[effect] as? AVAudioPlayer{
             audioPlayer.stop()
-            audioPlayer.currentTime = 0            
+            audioPlayer.currentTime = 0
+            audioPlayer.volume = self.sfxVolume
         }
+        
     }
     
     public func changeVolumeSFX(volume: Float){
