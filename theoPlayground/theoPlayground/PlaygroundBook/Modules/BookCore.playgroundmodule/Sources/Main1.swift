@@ -114,7 +114,7 @@ public class Main1: SKScene, MicDelegate {
         self.playingState = .finished
         self.mic?.stopRecorder()
         Animator.animateBowe(node: self.boweNode, animation: .endingShout, mustLoop: false){
-            PlaygroundPage.current.assessmentStatus = .pass(message: "Much Better! Please, go to the [next page](@next)")
+            PlaygroundPage.current.assessmentStatus = .pass(message: "Much Better! Go to the [next page](@next)")
             Animator.animateBowe(node: self.boweNode, animation: .idleHappy, mustLoop: true){}
         }
         self.hideUI()
