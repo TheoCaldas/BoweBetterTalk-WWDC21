@@ -64,7 +64,7 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         self.hideUI()
         self.boweIdleTalk()
         Animator.animateDarwin(node: self.darwinNode, animation: .idle, mustLoop: true){}
-        
+        SoundManager.sharedInstance().playBackgroundMusic(.minigame2, mustLoop: false)
         self.shake = ShakeDetection(delegate: self)
         self.mic = MicDetection(delegate: self, volumeThreshold: 25.0)
         self.timerVoiceOver1.start()
@@ -72,11 +72,19 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
     
     override public func update(_ elapsedTime: TimeInterval) {
         self.updateProgressBar()
-        if self.playingState == .voiceOver1 && self.timerVoiceOver1.getTime() >= 2.0{
-            self.startGame1()
+        if self.playingState == .voiceOver1{
+            if self.timerVoiceOver1.getTime() >= 2.0 && self.timerVoiceOver1.getTime() < 3.0{
+                SoundManager.sharedInstance().playSoundEffect(.minigame3VoiceOver1, mustLoop: false)
+            }else if self.timerVoiceOver1.getTime() >= 7.0{
+                self.startGame1()
+            }
         }
-        if self.playingState == .voiceOver2 && self.timerVoiceOver2.getTime() >= 4.0{
-            self.startGame2()
+        if self.playingState == .voiceOver2{
+            if self.timerVoiceOver2.getTime() >= 2.0 && self.timerVoiceOver2.getTime() < 3.0{
+                SoundManager.sharedInstance().playSoundEffect(.minigame3VoiceOver2, mustLoop: false)
+            }else if self.timerVoiceOver2.getTime() >= 7.0{
+                self.startGame2()
+            }
         }
         if self.playingState == .shakeDetecting || self.playingState == .voiceOver2{
             self.updateWall()
@@ -143,6 +151,7 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         self.timerHint.reset()
         PlaygroundPage.current.assessmentStatus = .pass(message: "Finally! Checkout the [last page](@next)")
         Animator.animateDarwin(node: self.darwinNode, animation: .idleHappy, mustLoop: true){}
+        SoundManager.sharedInstance().playSoundEffect(.nextLevel, mustLoop: false)
         self.boweIsHappy = true
     }
     
@@ -196,24 +205,29 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         if self.wallHits == 0 && progress >= 1/3{
             self.wallHits = 1
             Animator.animateWall(node: self.wallNode, animation: .hit1, mustLoop: false){}
+            SoundManager.sharedInstance().playSoundEffect(.wallHit, mustLoop: false)
         }else if self.wallHits == 1 && progress >= 2/3{
             self.wallHits = 2
             Animator.animateWall(node: self.wallNode, animation: .hit2, mustLoop: false){}
+            SoundManager.sharedInstance().playSoundEffect(.wallHit, mustLoop: false)
         }else if self.wallHits == 2 && progress >= 1{
             self.wallHits = 3
             Animator.animateWall(node: self.wallNode, animation: .falling, mustLoop: false){}
+            SoundManager.sharedInstance().playSoundEffect(.wallFalling, mustLoop: false)
         }
     }
     
     private func boweIdleTalk(){
         if self.boweIsHappy{
             Animator.animateBowe(node: self.boweNode, animation: .idleHappy, mustLoop: false){
+                SoundManager.sharedInstance().playSoundEffect(.messageClear, mustLoop: false)
                 Animator.animateBowe(node: self.boweNode, animation: .talking, mustLoop: false){
                     self.boweIdleTalk()
                 }
             }
         }else{
             Animator.animateBowe(node: self.boweNode, animation: .idle, mustLoop: false){
+                SoundManager.sharedInstance().playSoundEffect(.messageClear, mustLoop: false)
                 Animator.animateBowe(node: self.boweNode, animation: .talking, mustLoop: false){
                     self.boweIdleTalk()
                 }

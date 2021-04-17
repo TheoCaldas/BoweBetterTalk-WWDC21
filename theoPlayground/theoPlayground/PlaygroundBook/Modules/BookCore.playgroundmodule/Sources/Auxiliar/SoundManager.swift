@@ -13,10 +13,25 @@ public enum BackgroundMusic: String {
 }
 
 public enum SFX: String, CaseIterable{
+    //global
     case hint = "minigame2 Hint 1.0.mp3"
+    case nextLevel = "minigame3 nextLevel 1.0.mp3"
+    
+    //minigame2
     case minigame2VoiceOver = "minigame2 VoiceOver 1.0.mp3"
     case boweScream = "minigame2 BoweScream 1.0.mp3"
     case boweHum = "minigame2 BoweHum 1.0.mp3"
+    
+    //minigame3
+    case wallHit = "minigame3 wallHit 1.0.mp3"
+    case wallFalling = "minigame3 wallFalling 1.0.mp3"
+    case darwinNo = "minigame3 darwinNo 1.0.mp3"
+    case darwinYes = "minigame3 darwinYes 1.0.mp3"
+    case messageBlock = "minigame3 messageBlock 1.0.mp3"
+    case messageClear = "minigame3 messageClear 1.0.mp3"
+    case messageMess = "minigame3 messageMess 1.0.mp3"
+    case minigame3VoiceOver1 = "minigame3 voiceOver1 1.0.mp3"
+    case minigame3VoiceOver2 = "minigame3 voiceOver2 1.0.mp3"
 }
 
 public class SoundManager {

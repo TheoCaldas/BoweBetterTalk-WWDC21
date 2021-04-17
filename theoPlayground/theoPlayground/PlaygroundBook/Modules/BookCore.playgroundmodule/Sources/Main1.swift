@@ -116,6 +116,7 @@ public class Main1: SKScene, MicDelegate {
         Animator.animateBowe(node: self.boweNode, animation: .endingShout, mustLoop: false){
             PlaygroundPage.current.assessmentStatus = .pass(message: "Much Better! Go to the [next page](@next)")
             Animator.animateBowe(node: self.boweNode, animation: .idleHappy, mustLoop: true){}
+            SoundManager.sharedInstance().playSoundEffect(.nextLevel, mustLoop: false)
         }
         self.hideUI()
         SoundManager.sharedInstance().stopSoundEffect(.boweScream)
