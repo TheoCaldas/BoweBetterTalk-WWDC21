@@ -33,7 +33,6 @@ class ShakeDetection{
     
     public func accelerationHandler(_ deviceMotion: CMAccelerometerData?) {
         if let data = deviceMotion {
-            //testar valores
             if(data.acceleration.x > 1.1 || data.acceleration.y > 1.1 || data.acceleration.z > 0.8){
                 self.delegate?.receiveSignal()
             }

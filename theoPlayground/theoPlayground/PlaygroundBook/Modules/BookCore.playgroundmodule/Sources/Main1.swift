@@ -63,8 +63,7 @@ public class Main1: SKScene, MicDelegate {
             }
         }
         if self.playingState == .playing{
-            let progress = currentScreamAmount/screamAmountTarget
-            self.progressBarFillNode.run(SKAction.scaleX(to: CGFloat(progress), duration: 0.02))
+            self.updateProgressBar()
             
             if self.timeSinceLastDetection.getTime() >= 0.1 {
                 self.interruptScream()
@@ -148,5 +147,10 @@ public class Main1: SKScene, MicDelegate {
         self.progressBarFillNode.isHidden = false
         self.progressBarNode.isHidden = false
         self.micNode.isHidden = false
+    }
+    
+    private func updateProgressBar(){
+        let progress = currentScreamAmount/screamAmountTarget
+        self.progressBarFillNode.run(SKAction.scaleX(to: CGFloat(progress), duration: 0.02))
     }
 }

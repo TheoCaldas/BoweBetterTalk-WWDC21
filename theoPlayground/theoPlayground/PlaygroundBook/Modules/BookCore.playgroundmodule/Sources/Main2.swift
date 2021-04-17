@@ -28,7 +28,10 @@ public class Main2: SKScene, ShakeDelegate {
     
     private var shake = ShakeDetection()
     private var currentShakeAmount: Float = .zero
-    private let shakeAmountTarget: Float = 15.0
+    private let shakeAmountTarget: Float = 10.0
+    private var wallHits = 0
+    
+    private var playingState: PlayingState = .voiceOver1
     
     private var boweNode = SKSpriteNode()
     private var darwinNode = SKSpriteNode()
@@ -47,6 +50,8 @@ public class Main2: SKScene, ShakeDelegate {
         self.micNode = self.childNode(withName: "//mic") as! SKSpriteNode
         self.shakeNode = self.childNode(withName: "//shake") as! SKSpriteNode
         
+        self.progressBarFillNode.xScale = .zero
+        
         self.addChild(label)
         label.zPosition = 200
         label.position = CGPoint(x: -400, y: -400)
@@ -58,16 +63,44 @@ public class Main2: SKScene, ShakeDelegate {
         Animator.animateDarwin(node: self.darwinNode, animation: .idle, mustLoop: true){}
         
         self.shake.delegate = self
-        self.shake.start()
+        self.startGame1()
     }
     
     override public func update(_ elapsedTime: TimeInterval) {
-        
+        self.updateProgressBar()
+        if self.playingState == .shakeDetecting || self.playingState == .voiceOver2{
+            self.updateWall()
+        }
     }
     
     func receiveSignal() {
         self.currentShakeAmount += 0.1
         label.text = "\(self.currentShakeAmount)"
+        
+        if self.currentShakeAmount >= self.shakeAmountTarget{
+//            self.currentShakeAmount = .zero
+            self.endGame1()
+        }
+    }
+    
+    private func startGame1(){
+        self.playingState = .shakeDetecting
+        self.shake.start()
+        self.showUI(.shake)
+    }
+    
+    private func endGame1(){
+        self.playingState = .voiceOver2
+        self.shake.stop()
+        self.hideUI()
+    }
+    
+    private func startGame2(){
+        
+    }
+    
+    private func endGame2(){
+        
     }
     
     private func hideUI(){
@@ -87,6 +120,31 @@ public class Main2: SKScene, ShakeDelegate {
         self.progressBarNode.isHidden = false
     }
     
+    private func updateProgressBar(){
+        if self.playingState == .shakeDetecting{
+            let progress = currentShakeAmount/shakeAmountTarget
+            self.progressBarFillNode.run(SKAction.scaleX(to: CGFloat(progress), duration: 0.02))
+        }else if self.playingState == .blowDetecting{
+//            let progress = currentScreamAmount/screamAmountTarget
+//            self.progressBarFillNode.run(SKAction.scaleX(to: CGFloat(progress), duration: 0.02))
+        }
+       
+    }
+    
+    private func updateWall(){
+        let progress = currentShakeAmount/shakeAmountTarget
+        if self.wallHits == 0 && progress >= 1/3{
+            self.wallHits = 1
+            Animator.animateWall(node: self.wallNode, animation: .hit1, mustLoop: false){}
+        }else if self.wallHits == 1 && progress >= 2/3{
+            self.wallHits = 2
+            Animator.animateWall(node: self.wallNode, animation: .hit2, mustLoop: false){}
+        }else if self.wallHits == 2 && progress >= 1{
+            self.wallHits = 3
+            Animator.animateWall(node: self.wallNode, animation: .falling, mustLoop: false){}
+        }
+    }
+    
     private func boweIdleTalk(){
         Animator.animateBowe(node: self.boweNode, animation: .idle, mustLoop: false){
             Animator.animateBowe(node: self.boweNode, animation: .talking, mustLoop: false){
@@ -94,5 +152,4 @@ public class Main2: SKScene, ShakeDelegate {
             }
         }
     }
-    
 }
