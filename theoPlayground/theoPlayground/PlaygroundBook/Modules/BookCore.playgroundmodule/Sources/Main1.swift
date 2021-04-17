@@ -75,7 +75,7 @@ public class Main1: SKScene, MicDelegate {
     }
     
     
-    func receiveSignal() {
+    func receiveMicSignal() {
         self.currentScreamAmount += 0.1
         
         if self.playingState == .started{

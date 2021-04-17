@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 
 protocol MicDelegate{
-    func receiveSignal()
+    func receiveMicSignal()
 }
 
 class MicDetection {
@@ -17,9 +17,9 @@ class MicDetection {
 
     private var recorder: AVAudioRecorder!
     private var levelTimer = Timer()
-    private var LEVEL_THRESHOLD: Float = 15.0
+    private var LEVEL_THRESHOLD: Float = 15.0 //the higher, the easier
         
-    var delegate: MicDelegate?
+    private var delegate: MicDelegate?
     
     init(delegate: MicDelegate, volumeThreshold: Float?){
         self.delegate = delegate
@@ -75,7 +75,7 @@ class MicDetection {
 
         if isLoud{
             //print("IsLoud!")
-            self.delegate?.receiveSignal()
+            self.delegate?.receiveMicSignal()
         }
         
     }

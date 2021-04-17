@@ -9,13 +9,17 @@ import Foundation
 import CoreMotion
 
 protocol ShakeDelegate{
-    func receiveSignal()
+    func receiveShakeSignal()
 }
 
 class ShakeDetection{
     
     private var motionManager = CMMotionManager()
-    var delegate: ShakeDelegate?
+    private var delegate: ShakeDelegate?
+    
+    init(delegate: ShakeDelegate){
+        self.delegate = delegate
+    }
     
     public func start(){
         motionManager.deviceMotionUpdateInterval = 1.0 / 60.0
@@ -34,7 +38,7 @@ class ShakeDetection{
     public func accelerationHandler(_ deviceMotion: CMAccelerometerData?) {
         if let data = deviceMotion {
             if(data.acceleration.x > 1.1 || data.acceleration.y > 1.1 || data.acceleration.z > 0.8){
-                self.delegate?.receiveSignal()
+                self.delegate?.receiveShakeSignal()
             }
         }
         

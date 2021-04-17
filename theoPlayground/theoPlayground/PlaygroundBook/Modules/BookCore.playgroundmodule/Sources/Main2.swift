@@ -9,7 +9,7 @@ import PlaygroundSupport
 import SpriteKit
 import CoreMotion
 
-public class Main2: SKScene, ShakeDelegate {
+public class Main2: SKScene, ShakeDelegate, MicDelegate {
     
     private enum GameUI{
         case shake
@@ -24,14 +24,19 @@ public class Main2: SKScene, ShakeDelegate {
         case finished //ok
     }
     
-    private var label = SKLabelNode()
-    
-    private var shake = ShakeDetection()
+    private var shake: ShakeDetection?
     private var currentShakeAmount: Float = .zero
-    private let shakeAmountTarget: Float = 10.0
+    private let shakeAmountTarget: Float = 5.0
     private var wallHits = 0
     
+    private var mic: MicDetection?
+    private var currentScreamAmount: Float = .zero
+    private let screamAmountTarget: Float = 10.0
+    
     private var playingState: PlayingState = .voiceOver1
+    private var timerVoiceOver1 = TimeCounter()
+    private var timerVoiceOver2 = TimeCounter()
+    private var timeBeforeFirstDetection = TimeCounter()
     
     private var boweNode = SKSpriteNode()
     private var darwinNode = SKSpriteNode()
@@ -40,6 +45,8 @@ public class Main2: SKScene, ShakeDelegate {
     private var progressBarFillNode = SKSpriteNode()
     private var micNode = SKSpriteNode()
     private var shakeNode = SKSpriteNode()
+    
+    private var boweIsHappy = false
     
     override public func didMove(to view: SKView) {
         self.boweNode = self.childNode(withName: "//bowe") as! SKSpriteNode
@@ -50,32 +57,33 @@ public class Main2: SKScene, ShakeDelegate {
         self.micNode = self.childNode(withName: "//mic") as! SKSpriteNode
         self.shakeNode = self.childNode(withName: "//shake") as! SKSpriteNode
         
-        self.progressBarFillNode.xScale = .zero
-        
-        self.addChild(label)
-        label.zPosition = 200
-        label.position = CGPoint(x: -400, y: -400)
-        label.fontSize = 150
-        label.text = "\(self.currentShakeAmount)"
+//        self.progressBarFillNode.xScale = .zero
         
         self.hideUI()
         self.boweIdleTalk()
         Animator.animateDarwin(node: self.darwinNode, animation: .idle, mustLoop: true){}
         
-        self.shake.delegate = self
-        self.startGame1()
+        self.shake = ShakeDetection(delegate: self)
+        self.mic = MicDetection(delegate: self, volumeThreshold: 25.0)
+        self.timerVoiceOver1.start()
     }
     
     override public func update(_ elapsedTime: TimeInterval) {
         self.updateProgressBar()
+        if self.playingState == .voiceOver1 && self.timerVoiceOver1.getTime() >= 2.0{
+            self.startGame1()
+        }
+        if self.playingState == .voiceOver2 && self.timerVoiceOver2.getTime() >= 4.0{
+            self.startGame2()
+        }
+        
         if self.playingState == .shakeDetecting || self.playingState == .voiceOver2{
             self.updateWall()
         }
     }
     
-    func receiveSignal() {
+    func receiveShakeSignal() {
         self.currentShakeAmount += 0.1
-        label.text = "\(self.currentShakeAmount)"
         
         if self.currentShakeAmount >= self.shakeAmountTarget{
 //            self.currentShakeAmount = .zero
@@ -83,24 +91,44 @@ public class Main2: SKScene, ShakeDelegate {
         }
     }
     
+    func receiveMicSignal() {
+        self.currentScreamAmount += 0.1
+        if self.currentScreamAmount >= self.screamAmountTarget{
+//            self.currentScreamAmount = .zero
+            self.endGame2()
+        }
+    }
+    
     private func startGame1(){
+        self.timerVoiceOver1.stop()
         self.playingState = .shakeDetecting
-        self.shake.start()
+        self.shake?.start()
         self.showUI(.shake)
     }
     
     private func endGame1(){
+        self.timerVoiceOver2.start()
         self.playingState = .voiceOver2
-        self.shake.stop()
+        self.shake?.stop()
         self.hideUI()
+        Animator.animateDarwin(node: self.darwinNode, animation: .angry, mustLoop: false){}
     }
     
     private func startGame2(){
-        
+        self.timerVoiceOver2.stop()
+        self.playingState = .blowDetecting
+        self.mic?.settupRecorder()
+        self.mic?.startRecorder()
+        self.showUI(.mic)
     }
     
     private func endGame2(){
-        
+        self.playingState = .finished
+        self.mic?.stopRecorder()
+        self.hideUI()
+        PlaygroundPage.current.assessmentStatus = .pass(message: "Finally! Checkout the [last page](@next)")
+        Animator.animateDarwin(node: self.darwinNode, animation: .idleHappy, mustLoop: true){}
+        self.boweIsHappy = true
     }
     
     private func hideUI(){
@@ -118,6 +146,7 @@ public class Main2: SKScene, ShakeDelegate {
         }
         self.progressBarFillNode.isHidden = false
         self.progressBarNode.isHidden = false
+        self.progressBarFillNode.xScale = .zero
     }
     
     private func updateProgressBar(){
@@ -125,8 +154,8 @@ public class Main2: SKScene, ShakeDelegate {
             let progress = currentShakeAmount/shakeAmountTarget
             self.progressBarFillNode.run(SKAction.scaleX(to: CGFloat(progress), duration: 0.02))
         }else if self.playingState == .blowDetecting{
-//            let progress = currentScreamAmount/screamAmountTarget
-//            self.progressBarFillNode.run(SKAction.scaleX(to: CGFloat(progress), duration: 0.02))
+            let progress = currentScreamAmount/screamAmountTarget
+            self.progressBarFillNode.run(SKAction.scaleX(to: CGFloat(progress), duration: 0.02))
         }
        
     }
@@ -146,10 +175,19 @@ public class Main2: SKScene, ShakeDelegate {
     }
     
     private func boweIdleTalk(){
-        Animator.animateBowe(node: self.boweNode, animation: .idle, mustLoop: false){
-            Animator.animateBowe(node: self.boweNode, animation: .talking, mustLoop: false){
-                self.boweIdleTalk()
+        if self.boweIsHappy{
+            Animator.animateBowe(node: self.boweNode, animation: .idleHappy, mustLoop: false){
+                Animator.animateBowe(node: self.boweNode, animation: .talking, mustLoop: false){
+                    self.boweIdleTalk()
+                }
+            }
+        }else{
+            Animator.animateBowe(node: self.boweNode, animation: .idle, mustLoop: false){
+                Animator.animateBowe(node: self.boweNode, animation: .talking, mustLoop: false){
+                    self.boweIdleTalk()
+                }
             }
         }
+        
     }
 }
