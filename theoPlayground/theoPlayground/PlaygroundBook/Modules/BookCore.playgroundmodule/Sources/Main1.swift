@@ -43,7 +43,7 @@ public class Main1: SKScene, MicDelegate {
         self.hideUI()
                 
         timeBeforeFirstDetection.start()
-        Animator.animateBowe(node: self.boweNode, animation: .idleSad){}
+        Animator.animateBowe(node: self.boweNode, animation: .idleSad, mustLoop: true){}
         SoundManager.sharedInstance().playBackgroundMusic(.minigame2, mustLoop: false)
         self.mic = MicDetection(delegate: self, volumeThreshold: nil)
     }
@@ -84,14 +84,14 @@ public class Main1: SKScene, MicDelegate {
             self.timeSinceLastDetection.start()
             self.timeBeforeFirstDetection.stop()
             SoundManager.sharedInstance().playSoundEffect(.boweScream, mustLoop: false)
-            Animator.animateBowe(node: self.boweNode, animation: .startingShout){
-                Animator.animateBowe(node: self.boweNode, animation: .shouting){}
+            Animator.animateBowe(node: self.boweNode, animation: .startingShout, mustLoop: false){
+                Animator.animateBowe(node: self.boweNode, animation: .shouting, mustLoop: true){}
             }
         }
         else if self.playingState == .playing{
             if self.timeSinceLastDetection.getTime() >= 0.2{
                 SoundManager.sharedInstance().playSoundEffect(.boweScream, mustLoop: false)
-                Animator.animateBowe(node: self.boweNode, animation: .shouting){}
+                Animator.animateBowe(node: self.boweNode, animation: .shouting, mustLoop: true){}
             }
         }
         
@@ -114,9 +114,9 @@ public class Main1: SKScene, MicDelegate {
     private func endGame(){
         self.playingState = .finished
         self.mic?.stopRecorder()
-        Animator.animateBowe(node: self.boweNode, animation: .endingShout){
+        Animator.animateBowe(node: self.boweNode, animation: .endingShout, mustLoop: false){
             PlaygroundPage.current.assessmentStatus = .pass(message: "Much Better! Please, go to the [next page](@next)")
-            Animator.animateBowe(node: self.boweNode, animation: .idleHappy){}
+            Animator.animateBowe(node: self.boweNode, animation: .idleHappy, mustLoop: true){}
         }
         self.hideUI()
         SoundManager.sharedInstance().stopSoundEffect(.boweScream)
@@ -134,7 +134,7 @@ public class Main1: SKScene, MicDelegate {
         if !self.screamWasInterrupted{
             self.screamWasInterrupted = true
             SoundManager.sharedInstance().stopSoundEffect(.boweScream)
-            Animator.animateBowe(node: self.boweNode, animation: .pauseShout){}
+            Animator.animateBowe(node: self.boweNode, animation: .pauseShout, mustLoop: false){}
         }
     }
     

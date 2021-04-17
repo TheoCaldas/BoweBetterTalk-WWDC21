@@ -39,7 +39,7 @@ class Animator{
         case falling
     }
     
-    static func animateBowe(node: SKSpriteNode, animation: BoweAnimation, completion: @escaping() -> Void){
+    static func animateBowe(node: SKSpriteNode, animation: BoweAnimation, mustLoop: Bool, completion: @escaping() -> Void){
         switch animation {
         case .idle:
             var orderedFrames = [FrameDuration]()
@@ -74,8 +74,12 @@ class Animator{
             
             let seq = SKAction.sequence(actions)
             node.removeAllActions()
-            node.run(SKAction.repeatForever(seq))
-            
+//            node.run(SKAction.repeatForever(seq))
+            if mustLoop{
+                node.run(SKAction.repeatForever(seq))
+            }else{
+                node.run(seq, completion: completion)
+            }
         case .startingShout:
             var textures = [SKTexture]()
             
@@ -86,7 +90,12 @@ class Animator{
             let animate = SKAction.animate(with: textures, timePerFrame: 0.1)
             
             node.removeAllActions()
-            node.run(animate, completion: completion)
+//            node.run(animate, completion: completion)
+            if mustLoop{
+                node.run(SKAction.repeatForever(animate))
+            }else{
+                node.run(animate, completion: completion)
+            }
         case .shouting:
             var textures = [SKTexture]()
             
@@ -113,7 +122,12 @@ class Animator{
             let animate = SKAction.animate(with: textures, timePerFrame: 0.1)
             
             node.removeAllActions()
-            node.run(animate, completion: completion)
+//            node.run(animate, completion: completion)
+            if mustLoop{
+                node.run(SKAction.repeatForever(animate))
+            }else{
+                node.run(animate, completion: completion)
+            }
         case .idleHappy:
             var orderedFrames = [FrameDuration]()
             orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
@@ -147,7 +161,12 @@ class Animator{
             
             let seq = SKAction.sequence(actions)
             node.removeAllActions()
-            node.run(SKAction.repeatForever(seq))
+//            node.run(SKAction.repeatForever(seq))
+            if mustLoop{
+                node.run(SKAction.repeatForever(seq))
+            }else{
+                node.run(seq, completion: completion)
+            }
         case .idleSad:
             var orderedFrames = [FrameDuration]()
             orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
@@ -181,7 +200,12 @@ class Animator{
             
             let seq = SKAction.sequence(actions)
             node.removeAllActions()
-            node.run(SKAction.repeatForever(seq))
+//            node.run(SKAction.repeatForever(seq))
+            if mustLoop{
+                node.run(SKAction.repeatForever(seq))
+            }else{
+                node.run(seq, completion: completion)
+            }
         case .talking:
             var orderedFrames = [FrameDuration]()
             orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
@@ -207,11 +231,16 @@ class Animator{
             
             let seq = SKAction.sequence(actions)
             node.removeAllActions()
-            node.run(seq, completion: completion)
+//            node.run(seq, completion: completion)
+            if mustLoop{
+                node.run(SKAction.repeatForever(seq))
+            }else{
+                node.run(seq, completion: completion)
+            }
         }
     }
     
-    static func animateDarwin(node: SKSpriteNode, animation: DarwinAnimation, completion: @escaping() -> Void){
+    static func animateDarwin(node: SKSpriteNode, animation: DarwinAnimation, mustLoop: Bool, completion: @escaping() -> Void){
         switch animation {
         case .idle:
             var orderedFrames = [FrameDuration]()
@@ -242,7 +271,12 @@ class Animator{
             
             let seq = SKAction.sequence(actions)
             node.removeAllActions()
-            node.run(SKAction.repeatForever(seq))
+//            node.run(SKAction.repeatForever(seq))
+            if mustLoop{
+                node.run(SKAction.repeatForever(seq))
+            }else{
+                node.run(seq, completion: completion)
+            }
         case .idleHappy:
             var orderedFrames = [FrameDuration]()
             orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
@@ -272,7 +306,12 @@ class Animator{
             
             let seq = SKAction.sequence(actions)
             node.removeAllActions()
-            node.run(SKAction.repeatForever(seq))
+//            node.run(SKAction.repeatForever(seq))
+            if mustLoop{
+                node.run(SKAction.repeatForever(seq))
+            }else{
+                node.run(seq, completion: completion)
+            }
         case .angry:
             let texture = SKTexture(imageNamed: String(format: "darwinChateado%02d", 0))
             node.texture = texture
@@ -280,7 +319,7 @@ class Animator{
         }
     }
     
-    static func animateWall(node: SKSpriteNode, animation: WallAnimation, completion: @escaping() -> Void){
+    static func animateWall(node: SKSpriteNode, animation: WallAnimation, mustLoop: Bool, completion: @escaping() -> Void){
         switch animation {
         case .noHit:
             let texture = SKTexture(imageNamed: String(format: "paredeCaindo%02d", 0))
@@ -304,7 +343,12 @@ class Animator{
             let animate = SKAction.animate(with: textures, timePerFrame: 0.2)
             
             node.removeAllActions()
-            node.run(animate, completion: completion)
+//            node.run(animate, completion: completion)
+            if mustLoop{
+                node.run(SKAction.repeatForever(animate))
+            }else{
+                node.run(animate, completion: completion)
+            }
         }
     }
     

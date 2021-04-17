@@ -54,8 +54,8 @@ public class Main2: SKScene, ShakeDelegate {
         label.text = "\(self.currentShakeAmount)"
         
         self.hideUI()
-        Animator.animateBowe(node: self.boweNode, animation: .idle){}
-        Animator.animateDarwin(node: self.darwinNode, animation: .idle){}
+        self.boweIdleTalk()
+        Animator.animateDarwin(node: self.darwinNode, animation: .idle, mustLoop: true){}
         
         self.shake.delegate = self
         self.shake.start()
@@ -85,6 +85,14 @@ public class Main2: SKScene, ShakeDelegate {
         }
         self.progressBarFillNode.isHidden = false
         self.progressBarNode.isHidden = false
+    }
+    
+    private func boweIdleTalk(){
+        Animator.animateBowe(node: self.boweNode, animation: .idle, mustLoop: false){
+            Animator.animateBowe(node: self.boweNode, animation: .talking, mustLoop: false){
+                self.boweIdleTalk()
+            }
+        }
     }
     
 }
