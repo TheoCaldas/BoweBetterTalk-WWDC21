@@ -45,7 +45,7 @@ public class Main1: SKScene, MicDelegate {
         timeBeforeFirstDetection.start()
         Animator.animateBowe(node: self.boweNode, animation: .idleSad, mustLoop: true){}
         SoundManager.sharedInstance().playBackgroundMusic(.minigame2, mustLoop: false)
-        self.mic = MicDetection(delegate: self, volumeThreshold: nil)
+        self.mic = MicDetection(delegate: self, volumeThreshold: 15.0)
     }
     
     override public func update(_ elapsedTime: TimeInterval) {

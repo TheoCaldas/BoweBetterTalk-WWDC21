@@ -46,6 +46,16 @@
 		E47AC0A12629F58200D60C44 /* minigame2 VoiceOver 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC09C2629F58200D60C44 /* minigame2 VoiceOver 1.0.mp3 */; };
 		E47AC0A22629F58200D60C44 /* minigame2 BoweHum 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC09D2629F58200D60C44 /* minigame2 BoweHum 1.0.mp3 */; };
 		E47AC0AC262A40DF00D60C44 /* ShakeDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC0AB262A40DF00D60C44 /* ShakeDetection.swift */; };
+		E47AC0C0262B642800D60C44 /* minigame3 darwinNo 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0B6262B642600D60C44 /* minigame3 darwinNo 1.0.mp3 */; };
+		E47AC0C1262B642800D60C44 /* minigame3 darwinYes 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0B7262B642600D60C44 /* minigame3 darwinYes 1.0.mp3 */; };
+		E47AC0C2262B642800D60C44 /* minigame3 voiceOver1 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0B8262B642600D60C44 /* minigame3 voiceOver1 1.0.mp3 */; };
+		E47AC0C3262B642800D60C44 /* minigame3 messageBlock 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0B9262B642700D60C44 /* minigame3 messageBlock 1.0.mp3 */; };
+		E47AC0C4262B642800D60C44 /* minigame3 voiceOver2 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0BA262B642700D60C44 /* minigame3 voiceOver2 1.0.mp3 */; };
+		E47AC0C5262B642800D60C44 /* minigame3 wallHit 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0BB262B642700D60C44 /* minigame3 wallHit 1.0.mp3 */; };
+		E47AC0C6262B642800D60C44 /* minigame3 wallFalling 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0BC262B642700D60C44 /* minigame3 wallFalling 1.0.mp3 */; };
+		E47AC0C7262B642800D60C44 /* minigame3 messageClear 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0BD262B642800D60C44 /* minigame3 messageClear 1.0.mp3 */; };
+		E47AC0C8262B642800D60C44 /* minigame3 messageMess 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0BE262B642800D60C44 /* minigame3 messageMess 1.0.mp3 */; };
+		E47AC0C9262B642800D60C44 /* minigame3 nextLevel 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0BF262B642800D60C44 /* minigame3 nextLevel 1.0.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -205,6 +215,16 @@
 		E47AC09C2629F58200D60C44 /* minigame2 VoiceOver 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame2 VoiceOver 1.0.mp3"; sourceTree = "<group>"; };
 		E47AC09D2629F58200D60C44 /* minigame2 BoweHum 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame2 BoweHum 1.0.mp3"; sourceTree = "<group>"; };
 		E47AC0AB262A40DF00D60C44 /* ShakeDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeDetection.swift; sourceTree = "<group>"; };
+		E47AC0B6262B642600D60C44 /* minigame3 darwinNo 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 darwinNo 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC0B7262B642600D60C44 /* minigame3 darwinYes 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 darwinYes 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC0B8262B642600D60C44 /* minigame3 voiceOver1 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 voiceOver1 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC0B9262B642700D60C44 /* minigame3 messageBlock 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 messageBlock 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC0BA262B642700D60C44 /* minigame3 voiceOver2 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 voiceOver2 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC0BB262B642700D60C44 /* minigame3 wallHit 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 wallHit 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC0BC262B642700D60C44 /* minigame3 wallFalling 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 wallFalling 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC0BD262B642800D60C44 /* minigame3 messageClear 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 messageClear 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC0BE262B642800D60C44 /* minigame3 messageMess 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 messageMess 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC0BF262B642800D60C44 /* minigame3 nextLevel 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 nextLevel 1.0.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +485,7 @@
 		E47AC0972629D27300D60C44 /* Audio Files */ = {
 			isa = PBXGroup;
 			children = (
+				E47AC0B5262B641A00D60C44 /* minigame 3 */,
 				E47AC0982629F58200D60C44 /* minigame 2 */,
 			);
 			path = "Audio Files";
@@ -480,6 +501,23 @@
 				E47AC09D2629F58200D60C44 /* minigame2 BoweHum 1.0.mp3 */,
 			);
 			path = "minigame 2";
+			sourceTree = "<group>";
+		};
+		E47AC0B5262B641A00D60C44 /* minigame 3 */ = {
+			isa = PBXGroup;
+			children = (
+				E47AC0B6262B642600D60C44 /* minigame3 darwinNo 1.0.mp3 */,
+				E47AC0B7262B642600D60C44 /* minigame3 darwinYes 1.0.mp3 */,
+				E47AC0B9262B642700D60C44 /* minigame3 messageBlock 1.0.mp3 */,
+				E47AC0BD262B642800D60C44 /* minigame3 messageClear 1.0.mp3 */,
+				E47AC0BE262B642800D60C44 /* minigame3 messageMess 1.0.mp3 */,
+				E47AC0BF262B642800D60C44 /* minigame3 nextLevel 1.0.mp3 */,
+				E47AC0B8262B642600D60C44 /* minigame3 voiceOver1 1.0.mp3 */,
+				E47AC0BA262B642700D60C44 /* minigame3 voiceOver2 1.0.mp3 */,
+				E47AC0BC262B642700D60C44 /* minigame3 wallFalling 1.0.mp3 */,
+				E47AC0BB262B642700D60C44 /* minigame3 wallHit 1.0.mp3 */,
+			);
+			path = "minigame 3";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -633,16 +671,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E47AC0C4262B642800D60C44 /* minigame3 voiceOver2 1.0.mp3 in Resources */,
+				E47AC0C5262B642800D60C44 /* minigame3 wallHit 1.0.mp3 in Resources */,
 				E47AC09F2629F58200D60C44 /* minigame2 BoweScream 1.0.mp3 in Resources */,
 				E47AC0A02629F58200D60C44 /* minigame2 music 1.3.mp3 in Resources */,
+				E47AC0C0262B642800D60C44 /* minigame3 darwinNo 1.0.mp3 in Resources */,
+				E47AC0C3262B642800D60C44 /* minigame3 messageBlock 1.0.mp3 in Resources */,
 				0D81E92F2624CA0E0084A24C /* LiveView3.sks in Resources */,
 				0D81E8F52624B9A20084A24C /* LiveView1.sks in Resources */,
 				E47AC0A22629F58200D60C44 /* minigame2 BoweHum 1.0.mp3 in Resources */,
 				5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */,
 				E47AC0A12629F58200D60C44 /* minigame2 VoiceOver 1.0.mp3 in Resources */,
+				E47AC0C1262B642800D60C44 /* minigame3 darwinYes 1.0.mp3 in Resources */,
+				E47AC0C8262B642800D60C44 /* minigame3 messageMess 1.0.mp3 in Resources */,
 				E47AC09E2629F58200D60C44 /* minigame2 Hint 1.0.mp3 in Resources */,
+				E47AC0C6262B642800D60C44 /* minigame3 wallFalling 1.0.mp3 in Resources */,
 				0D81E9012624BAED0084A24C /* Main1.sks in Resources */,
 				0D81E90D2624BFDA0084A24C /* LiveView2.sks in Resources */,
+				E47AC0C9262B642800D60C44 /* minigame3 nextLevel 1.0.mp3 in Resources */,
+				E47AC0C2262B642800D60C44 /* minigame3 voiceOver1 1.0.mp3 in Resources */,
+				E47AC0C7262B642800D60C44 /* minigame3 messageClear 1.0.mp3 in Resources */,
 				0D81E9192624C02C0084A24C /* Main2.sks in Resources */,
 				5E551EC52371FC3F00784365 /* Assets.xcassets in Resources */,
 				0D81E93B2624CA5C0084A24C /* Main3.sks in Resources */,
