@@ -36,7 +36,7 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
     private var playingState: PlayingState = .voiceOver1
     private var timerVoiceOver1 = TimeCounter()
     private var timerVoiceOver2 = TimeCounter()
-    private var timeBeforeFirstDetection = TimeCounter()
+    private var timerHint = TimeCounter()
     
     private var boweNode = SKSpriteNode()
     private var darwinNode = SKSpriteNode()
@@ -47,6 +47,8 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
     private var shakeNode = SKSpriteNode()
     
     private var boweIsHappy = false
+    private var hint1HasAppeared = false
+    private var hint2HasAppeared = false
     
     override public func didMove(to view: SKView) {
         self.boweNode = self.childNode(withName: "//bowe") as! SKSpriteNode
@@ -76,14 +78,19 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         if self.playingState == .voiceOver2 && self.timerVoiceOver2.getTime() >= 4.0{
             self.startGame2()
         }
-        
         if self.playingState == .shakeDetecting || self.playingState == .voiceOver2{
             self.updateWall()
+        }
+        if self.playingState == .shakeDetecting || self.playingState == .blowDetecting{
+            if self.timerHint.getTime() >= 5.0{
+                self.showHint()
+            }
         }
     }
     
     func receiveShakeSignal() {
         self.currentShakeAmount += 0.1
+        self.timerHint.reset()
         
         if self.currentShakeAmount >= self.shakeAmountTarget{
 //            self.currentShakeAmount = .zero
@@ -93,6 +100,8 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
     
     func receiveMicSignal() {
         self.currentScreamAmount += 0.1
+        self.timerHint.reset()
+        
         if self.currentScreamAmount >= self.screamAmountTarget{
 //            self.currentScreamAmount = .zero
             self.endGame2()
@@ -104,6 +113,7 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         self.playingState = .shakeDetecting
         self.shake?.start()
         self.showUI(.shake)
+        self.timerHint.start()
     }
     
     private func endGame1(){
@@ -111,6 +121,8 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         self.playingState = .voiceOver2
         self.shake?.stop()
         self.hideUI()
+        self.timerHint.stop()
+        self.timerHint.reset()
         Animator.animateDarwin(node: self.darwinNode, animation: .angry, mustLoop: false){}
     }
     
@@ -120,12 +132,15 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         self.mic?.settupRecorder()
         self.mic?.startRecorder()
         self.showUI(.mic)
+        self.timerHint.start()
     }
     
     private func endGame2(){
         self.playingState = .finished
         self.mic?.stopRecorder()
         self.hideUI()
+        self.timerHint.stop()
+        self.timerHint.reset()
         PlaygroundPage.current.assessmentStatus = .pass(message: "Finally! Checkout the [last page](@next)")
         Animator.animateDarwin(node: self.darwinNode, animation: .idleHappy, mustLoop: true){}
         self.boweIsHappy = true
@@ -147,6 +162,22 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         self.progressBarFillNode.isHidden = false
         self.progressBarNode.isHidden = false
         self.progressBarFillNode.xScale = .zero
+    }
+    
+    private func showHint(){
+        if self.playingState == .shakeDetecting{
+            if !self.hint1HasAppeared{
+                self.hint1HasAppeared = true
+                SoundManager.sharedInstance().playSoundEffect(.hint, mustLoop: false)
+                PlaygroundPage.current.assessmentStatus = .fail(hints: ["Shake the device to break Bowe's wall!"], solution: nil)
+            }
+        }else if self.playingState == .blowDetecting{
+            if !self.hint2HasAppeared{
+                self.hint2HasAppeared = true
+                SoundManager.sharedInstance().playSoundEffect(.hint, mustLoop: false)
+                PlaygroundPage.current.assessmentStatus = .fail(hints: ["Blow the communication noises away!"], solution: nil)
+            }
+        }
     }
     
     private func updateProgressBar(){
