@@ -45,6 +45,7 @@
 		E47AC0A02629F58200D60C44 /* minigame2 music 1.3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC09B2629F58200D60C44 /* minigame2 music 1.3.mp3 */; };
 		E47AC0A12629F58200D60C44 /* minigame2 VoiceOver 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC09C2629F58200D60C44 /* minigame2 VoiceOver 1.0.mp3 */; };
 		E47AC0A22629F58200D60C44 /* minigame2 BoweHum 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC09D2629F58200D60C44 /* minigame2 BoweHum 1.0.mp3 */; };
+		E47AC0AC262A40DF00D60C44 /* ShakeDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC0AB262A40DF00D60C44 /* ShakeDetection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -203,6 +204,7 @@
 		E47AC09B2629F58200D60C44 /* minigame2 music 1.3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame2 music 1.3.mp3"; sourceTree = "<group>"; };
 		E47AC09C2629F58200D60C44 /* minigame2 VoiceOver 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame2 VoiceOver 1.0.mp3"; sourceTree = "<group>"; };
 		E47AC09D2629F58200D60C44 /* minigame2 BoweHum 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame2 BoweHum 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC0AB262A40DF00D60C44 /* ShakeDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeDetection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -455,6 +457,7 @@
 				E47AC04F2628E4D300D60C44 /* Animator.swift */,
 				E47AC0822629108F00D60C44 /* TimeCounter.swift */,
 				E47AC0912629CF4100D60C44 /* SoundManager.swift */,
+				E47AC0AB262A40DF00D60C44 /* ShakeDetection.swift */,
 			);
 			path = Auxiliar;
 			sourceTree = "<group>";
@@ -731,6 +734,7 @@
 				0D81E91F2624C0E40084A24C /* Main2.swift in Sources */,
 				5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */,
 				0D81E9352624CA3F0084A24C /* LiveView3.swift in Sources */,
+				E47AC0AC262A40DF00D60C44 /* ShakeDetection.swift in Sources */,
 				E47AC01F262888CA00D60C44 /* MicDetection.swift in Sources */,
 				0D81E9412624CAF40084A24C /* Main3.swift in Sources */,
 				0D81E8FB2624B9F60084A24C /* LiveView1.swift in Sources */,
