@@ -33,11 +33,10 @@ class Animator{
     }
     
     public enum WallAnimation{
+        case noHit
         case hit1
         case hit2
-        case hit3
         case falling
-        case down
     }
     
     static func animateBowe(node: SKSpriteNode, animation: BoweAnimation, completion: @escaping() -> Void){
@@ -212,21 +211,100 @@ class Animator{
         }
     }
     
-    static func animateDarwin(node: SKSpriteNode, animation: DarwinAnimation){
+    static func animateDarwin(node: SKSpriteNode, animation: DarwinAnimation, completion: @escaping() -> Void){
         switch animation {
         case .idle:
-            print()
-        default:
-            print()
+            var orderedFrames = [FrameDuration]()
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 2, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 3, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 2, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 4, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 5, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 4, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 6, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 6, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.5))
+            
+            var textures = [SKTexture]()
+            var actions = [SKAction]()
+
+            for i in 0...5{
+                textures.append(SKTexture(imageNamed: String(format: "darwinRespirando%02d", i)))
+            }
+        
+            for frameDuration in orderedFrames{
+                actions.append(SKAction.animate(with: [textures[frameDuration.frame-1]], timePerFrame: frameDuration.duration))
+            }
+            
+            let seq = SKAction.sequence(actions)
+            node.removeAllActions()
+            node.run(SKAction.repeatForever(seq))
+        case .idleHappy:
+            var orderedFrames = [FrameDuration]()
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 2, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 3, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 2, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 4, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 5, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 4, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 6, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.2))
+            orderedFrames.append(FrameDuration(frame: 6, duration: 0.1))
+            orderedFrames.append(FrameDuration(frame: 1, duration: 0.5))
+            
+            var textures = [SKTexture]()
+            var actions = [SKAction]()
+
+            for i in 0...5{
+                textures.append(SKTexture(imageNamed: String(format: "darwinRespirandoFeliz%02d", i)))
+            }
+        
+            for frameDuration in orderedFrames{
+                actions.append(SKAction.animate(with: [textures[frameDuration.frame-1]], timePerFrame: frameDuration.duration))
+            }
+            
+            let seq = SKAction.sequence(actions)
+            node.removeAllActions()
+            node.run(SKAction.repeatForever(seq))
+        case .angry:
+            let texture = SKTexture(imageNamed: String(format: "darwinChateado%02d", 0))
+            node.texture = texture
+            node.removeAllActions()
         }
     }
     
-    static func animateWall(node: SKSpriteNode, animation: WallAnimation){
+    static func animateWall(node: SKSpriteNode, animation: WallAnimation, completion: @escaping() -> Void){
         switch animation {
-        case .down:
-            print()
-        default:
-            print()
+        case .noHit:
+            let texture = SKTexture(imageNamed: String(format: "paredeCaindo%02d", 0))
+            node.texture = texture
+            node.removeAllActions()
+        case .hit1:
+            let texture = SKTexture(imageNamed: String(format: "paredeCaindo%02d", 1))
+            node.texture = texture
+            node.removeAllActions()
+        case .hit2:
+            let texture = SKTexture(imageNamed: String(format: "paredeCaindo%02d", 2))
+            node.texture = texture
+            node.removeAllActions()
+        case .falling:
+            var textures = [SKTexture]()
+            
+            for i in 3...9{
+                textures.append(SKTexture(imageNamed: String(format: "paredeCaindo%02d", i)))
+            }
+        
+            let animate = SKAction.animate(with: textures, timePerFrame: 0.2)
+            
+            node.removeAllActions()
+            node.run(animate, completion: completion)
         }
     }
     

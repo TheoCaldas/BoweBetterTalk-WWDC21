@@ -11,7 +11,7 @@ import Foundation
 
 public class Main1: SKScene, MicDelegate {
     
-    enum PlayingState{
+    private enum PlayingState{
         case notStarted //opens scene
         case started //end of instruction
         case playing //first detection
