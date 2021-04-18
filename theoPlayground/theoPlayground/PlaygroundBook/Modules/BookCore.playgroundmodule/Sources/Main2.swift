@@ -56,6 +56,9 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
     private let blowDoodlesSize: [CGFloat] = [300, 200, 200, 200]
     private var doodlesBlownCount = 0
     
+    private var messageParticle: Particle?
+    private var messageChanged = false
+    
     override public func didMove(to view: SKView) {
         self.boweNode = self.childNode(withName: "//bowe") as! SKSpriteNode
         self.darwinNode = self.childNode(withName: "//darwin") as! SKSpriteNode
@@ -81,6 +84,8 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         self.renderDoodles()
         self.updateProgressBar()
         self.updateBlowDoodles()
+        self.updateMessageParticle()
+        self.checkMessageParticle()
         if self.playingState == .voiceOver1{
             if self.timerVoiceOver1.getTime() >= 2.0 && self.timerVoiceOver1.getTime() < 3.0{
                 SoundManager.sharedInstance().playSoundEffect(.minigame3VoiceOver1, mustLoop: false)
@@ -234,6 +239,7 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         if self.boweIsHappy{
             Animator.animateBowe(node: self.boweNode, animation: .idleHappy, mustLoop: false){
                 SoundManager.sharedInstance().playSoundEffect(.messageClear, mustLoop: false)
+                self.setMessageParticle()
                 Animator.animateBowe(node: self.boweNode, animation: .talking, mustLoop: false){
                     self.boweIdleTalk()
                 }
@@ -241,6 +247,7 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         }else{
             Animator.animateBowe(node: self.boweNode, animation: .idle, mustLoop: false){
                 SoundManager.sharedInstance().playSoundEffect(.messageClear, mustLoop: false)
+                self.setMessageParticle()
                 Animator.animateBowe(node: self.boweNode, animation: .talking, mustLoop: false){
                     self.boweIdleTalk()
                 }
@@ -301,5 +308,67 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
             }
 
         }
+    }
+    
+    private func setMessageParticle(){
+        let duration: CGFloat = 0.5
+        let offset: CGFloat = 200
+        self.messageChanged = false
+        self.messageParticle?.stopRender(duration: 0.0)
+        self.messageParticle?.removeFromParent()
+        self.messageParticle = Particle(in: self, position: CGPoint(x: -520, y: -120), speed: nil, radius: 10, lineWidth: 15, maxPoints: 10)
+        self.messageParticle?.zPosition = 100
+        self.addChild(self.messageParticle!)
+        self.messageParticle!.stopMove()
+        self.messageParticle!.physicsBody = nil
+        self.messageParticle!.changeLine(strokeColor: .white, lineWidth: 15, glowWidth: 0)
+        let oscillation = SKAction.oscillation(amplitude: 30, timePeriod: duration, midPoint: self.messageParticle!.position)
+        let move = SKAction.moveBy(x: offset, y: 0, duration: TimeInterval(duration))
+        let group = SKAction.group([oscillation, move])
+        self.messageParticle!.run(SKAction.repeatForever(group))
+    }
+    
+    private func checkMessageParticle(){
+        guard let message = self.messageParticle else {return}
+        if playingState == .voiceOver1 || playingState == .shakeDetecting{
+            if message.position.x > -70{
+//                self.messageParticle = nil
+//                message.removeAllActions()
+//                let random = Int.random(in: -2...1)
+//                let signal = (random >= 0) ? 1 : -1
+                let randomX = CGFloat.random(in: 50...200)
+                let randomY = CGFloat.random(in: -100...200)
+                let blockMove = SKAction.moveBy(x: -randomX, y: randomY, duration: 0.1)
+                message.run(blockMove, completion: {
+                    message.stopRender(duration: 0.5)
+                    message.removeFromParent()
+                })
+                SoundManager.sharedInstance().playSoundEffect(.messageBlock, mustLoop: false)
+            }
+        }else if playingState == .voiceOver2 || playingState == .blowDetecting{
+            if message.position.x > -70 && !messageChanged{
+                messageChanged = true
+                self.messageParticle!.changeLine(strokeColor: .white, lineWidth: 25, glowWidth: 30)
+                
+            }
+        }else{
+            
+        }
+    }
+    
+    private func updateMessageParticle(){
+        self.messageParticle?.updateLine()
+        self.messageParticle?.renderLine()
+    }
+}
+
+extension SKAction {
+    static func oscillation(amplitude a: CGFloat, timePeriod t: CGFloat, midPoint: CGPoint) -> SKAction {
+        let action = SKAction.customAction(withDuration: Double(t)) { node, currentTime in
+            let displacement = a * sin(2 * CGFloat.pi * currentTime / t)
+            node.position.y = midPoint.y + displacement
+        }
+
+        return action
     }
 }

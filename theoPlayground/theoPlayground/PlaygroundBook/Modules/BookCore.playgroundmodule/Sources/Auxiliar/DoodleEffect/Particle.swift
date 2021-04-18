@@ -132,4 +132,10 @@ class Particle: SKSpriteNode {
     public func stopRender(duration: TimeInterval){
         self.line.run(SKAction.fadeOut(withDuration: duration), completion: {self.line.removeFromParent()})
     }
+    
+    public func changeLine(strokeColor: UIColor, lineWidth: CGFloat, glowWidth: CGFloat){
+        self.line.lineWidth = lineWidth
+        self.line.strokeColor = strokeColor
+        self.line.glowWidth = glowWidth
+    }
 }
