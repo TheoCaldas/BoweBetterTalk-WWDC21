@@ -130,6 +130,6 @@ class Particle: SKSpriteNode {
     }
     
     public func stopRender(duration: TimeInterval){
-        self.line.run(SKAction.fadeOut(withDuration: 1.0), completion: {self.line.removeFromParent()})
+        self.line.run(SKAction.fadeOut(withDuration: duration), completion: {self.line.removeFromParent()})
     }
 }
