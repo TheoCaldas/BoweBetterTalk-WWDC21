@@ -186,9 +186,9 @@ public class Main1: SKScene, MicDelegate {
     }
     
     private func renderDoodles(){
-        self.boweDoodle!.updateEffect()
-        self.bigDoodle!.updateEffect()
-        self.mouthDoodle!.updateEffect()
+        self.boweDoodle!.renderEffect()
+        self.bigDoodle!.renderEffect()
+        self.mouthDoodle!.renderEffect()
     }
     
     private func removeDoodles(){

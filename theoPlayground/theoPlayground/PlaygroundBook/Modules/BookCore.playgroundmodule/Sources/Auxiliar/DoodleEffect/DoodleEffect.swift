@@ -23,7 +23,7 @@ class DoodleEffect{
     private var bounds: ParticleBounds?
     private var field: SKFieldNode?
     
-    private var currentPos: CGPoint = .zero
+    public var currentPos: CGPoint = .zero
     
     init(in node: SKNode, point: CGPoint, width: CGFloat, height: CGFloat, numParticles: Int, particlesSpeed: CGFloat?, particlesRadius: CGFloat?, particlesLineWidth: CGFloat?, particlesMaxPoint: Int?, fieldPos: FieldPosition, fieldStrength: Float?){
         
@@ -83,7 +83,7 @@ class DoodleEffect{
         }
     }
     
-    public func updateEffect(){
+    public func renderEffect(){
         for particle in self.particles{
             particle.updateLine()
             particle.renderLine()
@@ -120,10 +120,10 @@ class DoodleEffect{
         particles = [Particle]()
     }
     
-    public func moveTo(point: CGPoint, duration: TimeInterval){
+    public func moveTo(point: CGPoint, duration: TimeInterval, completion: @escaping() -> Void){
         let action = SKAction.move(to: point, duration: duration)
         action.timingMode = .easeIn
-        self.bounds?.run(action)
+        self.bounds?.run(action, completion: completion)
         self.field?.run(action)
         self.currentPos = point
     }

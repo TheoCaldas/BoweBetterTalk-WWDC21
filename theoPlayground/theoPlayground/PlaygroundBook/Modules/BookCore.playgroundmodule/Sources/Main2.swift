@@ -50,7 +50,11 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
     private var hint1HasAppeared = false
     private var hint2HasAppeared = false
     
-//    private var doodle: DoodleEffect?
+    private var wallDoodle: DoodleEffect?
+    private var blowDoodles = [DoodleEffect]()
+    private let blowDoodlesInitialPos: [CGPoint] = [CGPoint(x: 0, y: -100), CGPoint(x: -280, y: 80), CGPoint(x: 150, y: 280), CGPoint(x: 200, y: -320)]
+    private let blowDoodlesSize: [CGFloat] = [300, 200, 200, 200]
+    private var doodlesBlownCount = 0
     
     override public func didMove(to view: SKView) {
         self.boweNode = self.childNode(withName: "//bowe") as! SKSpriteNode
@@ -61,6 +65,8 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         self.micNode = self.childNode(withName: "//mic") as! SKSpriteNode
         self.shakeNode = self.childNode(withName: "//shake") as! SKSpriteNode
         
+        self.wallDoodle = DoodleEffect(in: self.wallNode, point: CGPoint(x: 40, y: -30), width: 180, height: 930, numParticles: 4, particlesSpeed: 10, particlesRadius: 15, particlesLineWidth: 20, particlesMaxPoint: 200, fieldPos: .center, fieldStrength: 1)
+        self.wallDoodle?.startParticlesMove()
         
         self.hideUI()
         self.boweIdleTalk()
@@ -72,7 +78,9 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
     }
     
     override public func update(_ elapsedTime: TimeInterval) {
+        self.renderDoodles()
         self.updateProgressBar()
+        self.updateBlowDoodles()
         if self.playingState == .voiceOver1{
             if self.timerVoiceOver1.getTime() >= 2.0 && self.timerVoiceOver1.getTime() < 3.0{
                 SoundManager.sharedInstance().playSoundEffect(.minigame3VoiceOver1, mustLoop: false)
@@ -215,6 +223,10 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
             self.wallHits = 3
             Animator.animateWall(node: self.wallNode, animation: .falling, mustLoop: false){}
             SoundManager.sharedInstance().playSoundEffect(.wallFalling, mustLoop: false)
+            self.wallDoodle?.moveTo(point: CGPoint(x: (self.wallDoodle?.currentPos.x)!, y: (self.wallDoodle?.currentPos.y)! - 1000), duration: 1.0){
+                self.wallDoodle?.removeAllParticles(duration: 1.0)
+                self.setBlowDoodles()
+            }
         }
     }
     
@@ -235,5 +247,59 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
             }
         }
         
+    }
+    
+    private func renderDoodles(){
+        self.wallDoodle!.renderEffect()
+        if self.playingState == .voiceOver2 || self.playingState == .blowDetecting || self.playingState == .finished{
+            for doodle in self.blowDoodles{
+                doodle.renderEffect()
+            }
+        }
+    }
+    
+    private func setBlowDoodles(){
+        for i in 0...3{
+            if i == 0{
+                let blowDoodle = DoodleEffect(in: self.wallNode, point: self.blowDoodlesInitialPos[i], width: self.blowDoodlesSize[i], height: self.blowDoodlesSize[i], numParticles: 4, particlesSpeed: 10, particlesRadius: 15, particlesLineWidth: 30, particlesMaxPoint: 100, fieldPos: .center, fieldStrength: 5)
+                self.blowDoodles.append(blowDoodle)
+                blowDoodle.startParticlesMove()
+            }else{
+                let blowDoodle = DoodleEffect(in: self.wallNode, point: self.blowDoodlesInitialPos[i], width: self.blowDoodlesSize[i], height: self.blowDoodlesSize[i], numParticles: 3, particlesSpeed: 10, particlesRadius: 15, particlesLineWidth: 10, particlesMaxPoint: 100, fieldPos: .center, fieldStrength: 7)
+                self.blowDoodles.append(blowDoodle)
+                blowDoodle.startParticlesMove()
+            }
+        }
+    }
+    
+    private func updateBlowDoodles(){
+        let duration: TimeInterval = 0.5
+        if self.playingState == .blowDetecting || self.playingState == .finished{
+            let progress = currentScreamAmount/screamAmountTarget
+            if self.doodlesBlownCount == 0 && progress >= 1/4{
+                self.doodlesBlownCount = 1
+                let doodle = self.blowDoodles[3]
+                doodle.moveTo(point: CGPoint(x: doodle.currentPos.x + 100, y: doodle.currentPos.y - 100), duration: duration){
+                    doodle.removeAllParticles(duration: duration)
+                }
+            }else if self.doodlesBlownCount == 1 && progress >= 2/4{
+                self.doodlesBlownCount = 2
+                let doodle = self.blowDoodles[2]
+                doodle.moveTo(point: CGPoint(x: doodle.currentPos.x + 100, y: doodle.currentPos.y + 100), duration: duration){
+                    doodle.removeAllParticles(duration: duration)
+                }
+            }else if self.doodlesBlownCount == 2 && progress >= 3/4{
+                self.doodlesBlownCount = 3
+                let doodle = self.blowDoodles[1]
+                doodle.moveTo(point: CGPoint(x: doodle.currentPos.x - 100, y: doodle.currentPos.y + 100), duration: duration){
+                    doodle.removeAllParticles(duration: duration)
+                }
+            }else if self.doodlesBlownCount == 3 && progress >= 1{
+                self.doodlesBlownCount = 4
+                let doodle = self.blowDoodles[0]
+                doodle.removeAllParticles(duration: 2*duration)
+            }
+
+        }
     }
 }
