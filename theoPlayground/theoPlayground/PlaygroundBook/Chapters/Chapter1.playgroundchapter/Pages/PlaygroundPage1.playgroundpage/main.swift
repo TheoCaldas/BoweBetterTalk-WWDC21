@@ -25,7 +25,7 @@ let sceneView = SKView(frame: CGRect(x:0 , y:0, width: 683, height: 1024))
 if let scene = Main1(fileNamed: "Main1") {
     scene.scaleMode = .aspectFit
     sceneView.presentScene(scene)
-    sceneView.showsPhysics = true
+//    sceneView.showsPhysics = true
 }
 
 PlaygroundSupport.PlaygroundPage.current.liveView = sceneView

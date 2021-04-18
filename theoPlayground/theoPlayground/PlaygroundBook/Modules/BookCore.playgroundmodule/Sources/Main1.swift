@@ -25,6 +25,7 @@ public class Main1: SKScene, MicDelegate {
     private var playingState: PlayingState = .notStarted
     private var timeSinceLastDetection = TimeCounter()
     private var timeBeforeFirstDetection = TimeCounter()
+    private var timeAfterEnding = TimeCounter()
     
     private var boweNode = SKSpriteNode()
     private var micNode = SKSpriteNode()
@@ -36,6 +37,7 @@ public class Main1: SKScene, MicDelegate {
     
     private var boweDoodle: DoodleEffect?
     private var bigDoodle: DoodleEffect?
+    private var mouthDoodle: DoodleEffect?
     
     private var doodleCount = 0
     
@@ -50,8 +52,11 @@ public class Main1: SKScene, MicDelegate {
         self.boweDoodle = DoodleEffect(in: self.boweNode, point: CGPoint(x: 10, y: -340), width: 250, height: 130, numParticles: 3, particlesSpeed: 5, particlesRadius: 10, particlesLineWidth: 15, particlesMaxPoint: 50, fieldPos: .center, fieldStrength: 7)
         self.boweDoodle?.startParticlesMove()
         
-        self.bigDoodle = DoodleEffect(in: self.boweNode, point: CGPoint(x: -400, y: 400), width: 0, height: 0, numParticles: 0, particlesSpeed: 10, particlesRadius: 15, particlesLineWidth: 30, particlesMaxPoint: 100, fieldPos: .center, fieldStrength: 10)
+        self.bigDoodle = DoodleEffect(in: self.boweNode, point: CGPoint(x: -400, y: 400), width: 400, height: 400, numParticles: 0, particlesSpeed: 10, particlesRadius: 15, particlesLineWidth: 20, particlesMaxPoint: 100, fieldPos: .center, fieldStrength: 7)
         self.bigDoodle?.startParticlesMove()
+        
+        self.mouthDoodle = DoodleEffect(in: self.boweNode, point: CGPoint(x: -10, y: -160), width: 100, height: 100, numParticles: 0, particlesSpeed: 10, particlesRadius: 15, particlesLineWidth: 20, particlesMaxPoint: 20, fieldPos: .center, fieldStrength: 0)
+        self.mouthDoodle?.startParticlesMove()
                 
         timeBeforeFirstDetection.start()
         Animator.animateBowe(node: self.boweNode, animation: .idleSad, mustLoop: true){}
@@ -60,8 +65,7 @@ public class Main1: SKScene, MicDelegate {
     }
     
     override public func update(_ elapsedTime: TimeInterval) {
-        self.boweDoodle!.updateEffect()
-        self.bigDoodle!.updateEffect()
+        self.renderDoodles()
         if self.playingState == .notStarted{
             if self.timeBeforeFirstDetection.getTime() >= 3.0 && self.timeBeforeFirstDetection.getTime() < 4.0{
                 SoundManager.sharedInstance().playSoundEffect(.minigame2VoiceOver, mustLoop: false)
@@ -88,12 +92,20 @@ public class Main1: SKScene, MicDelegate {
         }
         if self.playingState == .finished{
             self.updateDoodles()
+            if timeAfterEnding.getTime() >= 3.0{
+                self.removeDoodles()
+            }
         }
     }
     
     
     func receiveMicSignal() {
         self.currentScreamAmount += 0.1
+        
+        if (self.mouthDoodle?.getParticlesCount())! <= 0{
+            self.mouthDoodle?.addParticle(in: self.boweNode, speed: 10, radius: 15, lineWidth: 20, maxPoints: 300)
+            self.mouthDoodle?.moveParticleTo(doodle: self.bigDoodle!, duration: 0.5, timeInterval: 0.5)
+        }
         
         if self.playingState == .started{
             self.playingState = .playing
@@ -115,7 +127,6 @@ public class Main1: SKScene, MicDelegate {
         self.screamWasInterrupted = false
         
         if self.currentScreamAmount >= self.screamAmountTarget{
-//            self.currentScreamAmount = .zero
             self.endGame()
         }
     }
@@ -137,6 +148,7 @@ public class Main1: SKScene, MicDelegate {
         }
         self.hideUI()
         SoundManager.sharedInstance().stopSoundEffect(.boweScream)
+        self.mouthDoodle?.removeAllParticles(duration: 0.3)
     }
     
     private func showHint(){
@@ -152,6 +164,7 @@ public class Main1: SKScene, MicDelegate {
             self.screamWasInterrupted = true
             SoundManager.sharedInstance().stopSoundEffect(.boweScream)
             Animator.animateBowe(node: self.boweNode, animation: .pauseShout, mustLoop: false){}
+            self.mouthDoodle?.removeAllParticles(duration: 0.3)
         }
     }
     
@@ -172,28 +185,39 @@ public class Main1: SKScene, MicDelegate {
         self.progressBarFillNode.run(SKAction.scaleX(to: CGFloat(progress), duration: 0.02))
     }
     
+    private func renderDoodles(){
+        self.boweDoodle!.updateEffect()
+        self.bigDoodle!.updateEffect()
+        self.mouthDoodle!.updateEffect()
+    }
+    
+    private func removeDoodles(){
+        self.boweDoodle?.removeAllParticles(duration: 2.0)
+        self.bigDoodle?.removeAllParticles(duration: 2.0)
+        self.mouthDoodle?.removeAllParticles(duration: 2.0)
+    }
+    
     private func updateDoodles(){
         let progress = currentScreamAmount/screamAmountTarget
-        if progress >= 1/4 && self.doodleCount == 0{
+        if progress >= 1/5 && self.doodleCount == 0{
             self.doodleCount = 1
             self.bigDoodle?.addParticle(in: self.boweNode, speed: 10, radius: 15, lineWidth: 30, maxPoints: 100)
-            self.bigDoodle?.addParticle(in: self.boweNode, speed: 10, radius: 15, lineWidth: 30, maxPoints: 100)
-        }else if progress >= 2/4 && self.doodleCount == 1{
+        }else if progress >= 1/3 && self.doodleCount == 1{
             self.doodleCount = 2
             self.bigDoodle?.addParticle(in: self.boweNode, speed: 10, radius: 15, lineWidth: 30, maxPoints: 100)
             self.bigDoodle?.addParticle(in: self.boweNode, speed: 10, radius: 15, lineWidth: 30, maxPoints: 100)
-            self.boweDoodle?.removeParticle()
-        }else if progress >= 3/4 && self.doodleCount == 2{
+            self.boweDoodle?.removeParticle(duration: 1.0)
+        }else if progress >= 2/3 && self.doodleCount == 2{
             self.doodleCount = 3
             self.bigDoodle?.addParticle(in: self.boweNode, speed: 10, radius: 15, lineWidth: 30, maxPoints: 100)
             self.bigDoodle?.addParticle(in: self.boweNode, speed: 10, radius: 15, lineWidth: 30, maxPoints: 100)
-            self.boweDoodle?.removeParticle()
+            self.boweDoodle?.removeParticle(duration: 1.0)
         }else if progress >= 1 && self.doodleCount == 3{
             self.doodleCount = 4
             self.bigDoodle?.addParticle(in: self.boweNode, speed: 10, radius: 15, lineWidth: 30, maxPoints: 100)
             self.bigDoodle?.addParticle(in: self.boweNode, speed: 10, radius: 15, lineWidth: 30, maxPoints: 100)
-            self.boweDoodle?.removeParticle()
-            self.boweDoodle?.removeField()
+            self.boweDoodle?.removeParticle(duration: 1.0)
+            self.timeAfterEnding.start()
         }
         
     }

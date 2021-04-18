@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 import SpriteKit
 
 public extension CGVector {
@@ -92,13 +93,34 @@ class Particle: SKSpriteNode {
         self.physicsBody?.applyImpulse(vector)
     }
     
-    public func startMove(){
-        self.accelerate()
-        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+    private func forceAccelerate() {
+        if self.physicsBody!.velocity.magnitude() > maxVelocity{
+            self.physicsBody!.velocity = .zero
+        }
+        let randomAngle = CGFloat.random(in: 0...CGFloat.pi*2)
+        let randomSpeed = self.particleSpeed//*3
+        let vector = CGVector(dx: randomSpeed * cos(randomAngle), dy: randomSpeed * sin(randomAngle))
+        self.physicsBody?.applyImpulse(vector)
     }
     
-    @objc private func updateTime(){
+    public func startMove(){
+        self.stopMove()
         self.accelerate()
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(accelerateTimer), userInfo: nil, repeats: true)
+    }
+    
+    public func startMove(timeInterval: TimeInterval){
+        self.stopMove()
+        self.forceAccelerate()
+        self.timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(forceAccelerateTimer), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func accelerateTimer(){
+        self.accelerate()
+    }
+    
+    @objc private func forceAccelerateTimer(){
+        self.forceAccelerate()
     }
     
     public func stopMove(){
@@ -107,7 +129,7 @@ class Particle: SKSpriteNode {
         self.physicsBody!.angularVelocity = .zero
     }
     
-    public func stopRender(){
+    public func stopRender(duration: TimeInterval){
         self.line.run(SKAction.fadeOut(withDuration: 1.0), completion: {self.line.removeFromParent()})
     }
 }

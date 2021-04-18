@@ -7,7 +7,6 @@
 
 import Foundation
 import SpriteKit
-import CoreGraphics
 
 class DoodleEffect{
     
@@ -24,7 +23,7 @@ class DoodleEffect{
     private var bounds: ParticleBounds?
     private var field: SKFieldNode?
     
-    private var initialPosition: CGPoint = .zero
+    private var currentPos: CGPoint = .zero
     
     init(in node: SKNode, point: CGPoint, width: CGFloat, height: CGFloat, numParticles: Int, particlesSpeed: CGFloat?, particlesRadius: CGFloat?, particlesLineWidth: CGFloat?, particlesMaxPoint: Int?, fieldPos: FieldPosition, fieldStrength: Float?){
         
@@ -44,14 +43,15 @@ class DoodleEffect{
             }
         }
         
-        self.initialPosition = point
+        self.currentPos = point
     }
     
-    private func setField(node: SKNode, fieldPos: FieldPosition, point: CGPoint, width: CGFloat, height: CGFloat, fieldStrength: Float?){
+    public func setField(node: SKNode, fieldPos: FieldPosition, point: CGPoint, width: CGFloat, height: CGFloat, fieldStrength: Float?){
         let fieldNode = SKFieldNode.radialGravityField();
         fieldNode.falloff = 0.0;
         fieldNode.strength = fieldStrength ?? 3;
         fieldNode.position = point
+        fieldNode.region = SKRegion(size: CGSize(width: width, height: height))
         switch fieldPos {
         case .top:
             fieldNode.position.y += height/2
@@ -95,20 +95,29 @@ class DoodleEffect{
     }
     
     public func addParticle(in node: SKNode, speed: CGFloat?, radius: CGFloat?, lineWidth: CGFloat?, maxPoints: Int?){
-        let particle = Particle(in: node, position: self.initialPosition, speed: speed, radius: radius, lineWidth: lineWidth, maxPoints: maxPoints)
+        let particle = Particle(in: node, position: self.currentPos, speed: speed, radius: radius, lineWidth: lineWidth, maxPoints: maxPoints)
         self.particles.append(particle)
         node.addChild(particle)
         particle.startMove()
     }
     
-    public func removeParticle(){
+    public func removeParticle(duration: TimeInterval){
         if particles.count >= 1{
             let particle = particles.last!
             particle.stopMove()
-            particle.stopRender()
+            particle.stopRender(duration: duration)
             particle.removeFromParent()
             particles.removeLast()
         }
+    }
+    
+    public func removeAllParticles(duration: TimeInterval){
+        for particle in particles{
+            particle.stopMove()
+            particle.stopRender(duration: duration)
+            particle.removeFromParent()
+        }
+        particles = [Particle]()
     }
     
     public func moveTo(point: CGPoint, duration: TimeInterval){
@@ -116,10 +125,39 @@ class DoodleEffect{
         action.timingMode = .easeIn
         self.bounds?.run(action)
         self.field?.run(action)
+        self.currentPos = point
     }
     
-    public func removeField(){
-        self.field?.removeFromParent()
+    public func moveParticleTo(point: CGPoint, duration: TimeInterval){
+        if particles.count >= 1{
+            let particle = particles.last!
+            particle.physicsBody?.collisionBitMask = Category.none
+            particle.physicsBody?.contactTestBitMask = Category.none
+            particle.run(SKAction.move(to: point, duration: duration), completion: {
+                particle.physicsBody?.collisionBitMask = Category.all
+                particle.physicsBody?.contactTestBitMask = Category.all
+            })
+        }
     }
     
+    public func moveParticleTo(doodle: DoodleEffect, duration: TimeInterval, timeInterval: TimeInterval){
+        if particles.count >= 1{
+            let particle = particles.last!
+            particle.physicsBody?.collisionBitMask = Category.none
+            particle.physicsBody?.contactTestBitMask = Category.none
+            particle.startMove(timeInterval: timeInterval)
+            particle.run(SKAction.move(to: doodle.currentPos, duration: duration), completion: {
+                particle.physicsBody?.collisionBitMask = Category.all
+                particle.physicsBody?.contactTestBitMask = Category.all
+//                doodle.particles.append(particle)
+//                self.particles.removeLast()
+                particle.startMove()
+            })
+
+        }
+    }
+    
+    public func getParticlesCount() -> Int{
+        return self.particles.count
+    }
 }
