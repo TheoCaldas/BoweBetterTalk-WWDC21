@@ -7,6 +7,7 @@
 
 import Foundation
 import SpriteKit
+import CoreGraphics
 
 class DoodleEffect{
     
@@ -23,25 +24,30 @@ class DoodleEffect{
     private var bounds: ParticleBounds?
     private var field: SKFieldNode?
     
+    private var initialPosition: CGPoint = .zero
+    
     init(in node: SKNode, point: CGPoint, width: CGFloat, height: CGFloat, numParticles: Int, particlesSpeed: CGFloat?, particlesRadius: CGFloat?, particlesLineWidth: CGFloat?, particlesMaxPoint: Int?, fieldPos: FieldPosition, fieldStrength: Float?){
-        
-        guard numParticles >= 1 else {return}
         
         self.setField(node: node, fieldPos: fieldPos, point: point, width: width, height: height, fieldStrength: fieldStrength)
         
-        self.bounds = ParticleBounds(color: .black, thickness: 10, point: point, height: height, width: width)
-        node.addChild(self.bounds!)
-        self.bounds!.isHidden = true
+        if width > .zero && height > .zero{
+            self.bounds = ParticleBounds(color: .black, thickness: 10, point: point, height: height, width: width)
+            node.addChild(self.bounds!)
+            self.bounds!.isHidden = true
+        }
                 
-        for _ in 1...numParticles{
-            let particle = Particle(in: node, position: point, speed: particlesSpeed, radius: particlesRadius, lineWidth: particlesLineWidth, maxPoints: particlesMaxPoint)
-            self.particles.append(particle)
-            node.addChild(particle)
+        if numParticles > 0{
+            for _ in 1...numParticles{
+                let particle = Particle(in: node, position: point, speed: particlesSpeed, radius: particlesRadius, lineWidth: particlesLineWidth, maxPoints: particlesMaxPoint)
+                self.particles.append(particle)
+                node.addChild(particle)
+            }
         }
         
+        self.initialPosition = point
     }
     
-    public func setField(node: SKNode, fieldPos: FieldPosition, point: CGPoint, width: CGFloat, height: CGFloat, fieldStrength: Float?){
+    private func setField(node: SKNode, fieldPos: FieldPosition, point: CGPoint, width: CGFloat, height: CGFloat, fieldStrength: Float?){
         let fieldNode = SKFieldNode.radialGravityField();
         fieldNode.falloff = 0.0;
         fieldNode.strength = fieldStrength ?? 3;
@@ -86,6 +92,34 @@ class DoodleEffect{
     
     public func showField(){
         self.bounds?.isHidden = false
+    }
+    
+    public func addParticle(in node: SKNode, speed: CGFloat?, radius: CGFloat?, lineWidth: CGFloat?, maxPoints: Int?){
+        let particle = Particle(in: node, position: self.initialPosition, speed: speed, radius: radius, lineWidth: lineWidth, maxPoints: maxPoints)
+        self.particles.append(particle)
+        node.addChild(particle)
+        particle.startMove()
+    }
+    
+    public func removeParticle(){
+        if particles.count >= 1{
+            let particle = particles.last!
+            particle.stopMove()
+            particle.stopRender()
+            particle.removeFromParent()
+            particles.removeLast()
+        }
+    }
+    
+    public func moveTo(point: CGPoint, duration: TimeInterval){
+        let action = SKAction.move(to: point, duration: duration)
+        action.timingMode = .easeIn
+        self.bounds?.run(action)
+        self.field?.run(action)
+    }
+    
+    public func removeField(){
+        self.field?.removeFromParent()
     }
     
 }

@@ -57,7 +57,6 @@ class Particle: SKSpriteNode {
         self.line.strokeColor = .black
         self.line.lineCap = .round
         self.line.glowWidth = 0
-        self.line.zPosition = 100
         parent.addChild(self.line)
     }
     
@@ -106,5 +105,9 @@ class Particle: SKSpriteNode {
         self.timer.invalidate()
         self.physicsBody!.velocity = .zero
         self.physicsBody!.angularVelocity = .zero
+    }
+    
+    public func stopRender(){
+        self.line.run(SKAction.fadeOut(withDuration: 1.0), completion: {self.line.removeFromParent()})
     }
 }
