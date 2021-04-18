@@ -50,6 +50,8 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
     private var hint1HasAppeared = false
     private var hint2HasAppeared = false
     
+//    private var doodle: DoodleEffect?
+    
     override public func didMove(to view: SKView) {
         self.boweNode = self.childNode(withName: "//bowe") as! SKSpriteNode
         self.darwinNode = self.childNode(withName: "//darwin") as! SKSpriteNode
@@ -59,7 +61,6 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         self.micNode = self.childNode(withName: "//mic") as! SKSpriteNode
         self.shakeNode = self.childNode(withName: "//shake") as! SKSpriteNode
         
-//        self.progressBarFillNode.xScale = .zero
         
         self.hideUI()
         self.boweIdleTalk()

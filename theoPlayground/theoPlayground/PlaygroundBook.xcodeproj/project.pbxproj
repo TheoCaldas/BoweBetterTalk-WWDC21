@@ -56,6 +56,9 @@
 		E47AC0C7262B642800D60C44 /* minigame3 messageClear 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0BD262B642800D60C44 /* minigame3 messageClear 1.0.mp3 */; };
 		E47AC0C8262B642800D60C44 /* minigame3 messageMess 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0BE262B642800D60C44 /* minigame3 messageMess 1.0.mp3 */; };
 		E47AC0C9262B642800D60C44 /* minigame3 nextLevel 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E47AC0BF262B642800D60C44 /* minigame3 nextLevel 1.0.mp3 */; };
+		E47AC0E7262C719E00D60C44 /* DoodleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC0E6262C719D00D60C44 /* DoodleEffect.swift */; };
+		E47AC0ED262C71AD00D60C44 /* ParticleBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC0EC262C71AD00D60C44 /* ParticleBounds.swift */; };
+		E47AC0F3262C71B800D60C44 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC0F2262C71B800D60C44 /* Particle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -225,6 +228,9 @@
 		E47AC0BD262B642800D60C44 /* minigame3 messageClear 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 messageClear 1.0.mp3"; sourceTree = "<group>"; };
 		E47AC0BE262B642800D60C44 /* minigame3 messageMess 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 messageMess 1.0.mp3"; sourceTree = "<group>"; };
 		E47AC0BF262B642800D60C44 /* minigame3 nextLevel 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 nextLevel 1.0.mp3"; sourceTree = "<group>"; };
+		E47AC0E6262C719D00D60C44 /* DoodleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoodleEffect.swift; sourceTree = "<group>"; };
+		E47AC0EC262C71AD00D60C44 /* ParticleBounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleBounds.swift; sourceTree = "<group>"; };
+		E47AC0F2262C71B800D60C44 /* Particle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -473,6 +479,7 @@
 		E47AC08C2629CA1E00D60C44 /* Auxiliar */ = {
 			isa = PBXGroup;
 			children = (
+				E47AC0E5262C718A00D60C44 /* DoodleEffect */,
 				E47AC01E262888CA00D60C44 /* MicDetection.swift */,
 				E47AC04F2628E4D300D60C44 /* Animator.swift */,
 				E47AC0822629108F00D60C44 /* TimeCounter.swift */,
@@ -518,6 +525,16 @@
 				E47AC0BB262B642700D60C44 /* minigame3 wallHit 1.0.mp3 */,
 			);
 			path = "minigame 3";
+			sourceTree = "<group>";
+		};
+		E47AC0E5262C718A00D60C44 /* DoodleEffect */ = {
+			isa = PBXGroup;
+			children = (
+				E47AC0E6262C719D00D60C44 /* DoodleEffect.swift */,
+				E47AC0EC262C71AD00D60C44 /* ParticleBounds.swift */,
+				E47AC0F2262C71B800D60C44 /* Particle.swift */,
+			);
+			path = DoodleEffect;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -774,16 +791,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				E47AC0502628E4D300D60C44 /* Animator.swift in Sources */,
+				E47AC0ED262C71AD00D60C44 /* ParticleBounds.swift in Sources */,
 				E47AC02A2628A68B00D60C44 /* Main1.swift in Sources */,
 				0D81E9132624C0100084A24C /* LiveView2.swift in Sources */,
 				5E3196F32061DEA40077BBD7 /* LiveViewSupport.swift in Sources */,
 				E47AC0832629108F00D60C44 /* TimeCounter.swift in Sources */,
 				E47AC0922629CF4100D60C44 /* SoundManager.swift in Sources */,
 				0D81E91F2624C0E40084A24C /* Main2.swift in Sources */,
+				E47AC0E7262C719E00D60C44 /* DoodleEffect.swift in Sources */,
 				5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */,
 				0D81E9352624CA3F0084A24C /* LiveView3.swift in Sources */,
 				E47AC0AC262A40DF00D60C44 /* ShakeDetection.swift in Sources */,
 				E47AC01F262888CA00D60C44 /* MicDetection.swift in Sources */,
+				E47AC0F3262C71B800D60C44 /* Particle.swift in Sources */,
 				0D81E9412624CAF40084A24C /* Main3.swift in Sources */,
 				0D81E8FB2624B9F60084A24C /* LiveView1.swift in Sources */,
 			);

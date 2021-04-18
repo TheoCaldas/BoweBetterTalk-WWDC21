@@ -34,6 +34,8 @@ public class Main1: SKScene, MicDelegate {
     private var hintHasAppeared = false
     private var screamWasInterrupted = false
     
+    private var doodle: DoodleEffect?
+    
     override public func didMove(to view: SKView) {
         self.boweNode = self.childNode(withName: "//bowe") as! SKSpriteNode
         self.micNode = self.childNode(withName: "//mic") as! SKSpriteNode
@@ -41,6 +43,9 @@ public class Main1: SKScene, MicDelegate {
         self.progressBarFillNode = self.childNode(withName: "//progressBarFill") as! SKSpriteNode
         self.progressBarFillNode.xScale = .zero
         self.hideUI()
+        
+        self.doodle = DoodleEffect(in: self.boweNode, point: CGPoint(x: 10, y: -340), width: 250, height: 130, numParticles: 3, particlesSpeed: 5, particlesRadius: 10, particlesLineWidth: 15, particlesMaxPoint: 50, fieldPos: .center, fieldStrength: 5)
+        self.doodle?.startParticlesMove()
                 
         timeBeforeFirstDetection.start()
         Animator.animateBowe(node: self.boweNode, animation: .idleSad, mustLoop: true){}
@@ -49,6 +54,7 @@ public class Main1: SKScene, MicDelegate {
     }
     
     override public func update(_ elapsedTime: TimeInterval) {
+        self.doodle!.updateEffect()
         if self.playingState == .notStarted{
             if self.timeBeforeFirstDetection.getTime() >= 3.0 && self.timeBeforeFirstDetection.getTime() < 4.0{
                 SoundManager.sharedInstance().playSoundEffect(.minigame2VoiceOver, mustLoop: false)
