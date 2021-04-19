@@ -11,7 +11,7 @@ Please, hit "Run My Code" to help Bowe!
   * Callout(Use Full Screen Mode for a better experience):
     Grab the slider in between the page and the Live View and move it by the page direction.
  
-When you’re done, go to [next page](@next)!
+When you’re done, go to the [next page](@next)!
 */
 //#-hidden-code
 import PlaygroundSupport
