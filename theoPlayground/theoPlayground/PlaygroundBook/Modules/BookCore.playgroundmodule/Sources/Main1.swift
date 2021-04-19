@@ -136,6 +136,8 @@ public class Main1: SKScene, MicDelegate {
         self.mic?.settupRecorder()
         self.mic?.startRecorder()
         self.showUI()
+        SoundManager.sharedInstance().changeVolumeBackgroundMusic(volume: 0.5)
+        SoundManager.sharedInstance().changeVolumeSFX(volume: 0.5)
     }
     
     private func endGame(){
@@ -148,6 +150,8 @@ public class Main1: SKScene, MicDelegate {
         }
         self.hideUI()
         SoundManager.sharedInstance().stopSoundEffect(.boweScream)
+        SoundManager.sharedInstance().changeVolumeBackgroundMusic(volume: 1.0)
+        SoundManager.sharedInstance().changeVolumeSFX(volume: 1.0)
         self.mouthDoodle?.removeAllParticles(duration: 0.3)
     }
     

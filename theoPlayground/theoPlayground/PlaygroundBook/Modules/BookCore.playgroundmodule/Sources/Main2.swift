@@ -76,7 +76,7 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         Animator.animateDarwin(node: self.darwinNode, animation: .idle, mustLoop: true){}
         SoundManager.sharedInstance().playBackgroundMusic(.minigame2, mustLoop: false)
         self.shake = ShakeDetection(delegate: self)
-        self.mic = MicDetection(delegate: self, volumeThreshold: 20.0)
+        self.mic = MicDetection(delegate: self, volumeThreshold: 25.0)
         self.timerVoiceOver1.start()
     }
     
@@ -155,6 +155,8 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         self.mic?.startRecorder()
         self.showUI(.mic)
         self.timerHint.start()
+        SoundManager.sharedInstance().changeVolumeBackgroundMusic(volume: 0.3)
+        SoundManager.sharedInstance().changeVolumeSFX(volume: 0.3)
     }
     
     private func endGame2(){
@@ -166,6 +168,8 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         PlaygroundPage.current.assessmentStatus = .pass(message: "Finally! Checkout the [last page](@next)")
         Animator.animateDarwin(node: self.darwinNode, animation: .idleHappy, mustLoop: true){}
         SoundManager.sharedInstance().playSoundEffect(.nextLevel, mustLoop: false)
+        SoundManager.sharedInstance().changeVolumeBackgroundMusic(volume: 1.0)
+        SoundManager.sharedInstance().changeVolumeSFX(volume: 1.0)
         self.boweIsHappy = true
     }
     
