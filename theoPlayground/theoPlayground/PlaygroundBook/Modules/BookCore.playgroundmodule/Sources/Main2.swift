@@ -76,7 +76,7 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         Animator.animateDarwin(node: self.darwinNode, animation: .idle, mustLoop: true){}
         SoundManager.sharedInstance().playBackgroundMusic(.minigame2, mustLoop: false)
         self.shake = ShakeDetection(delegate: self)
-        self.mic = MicDetection(delegate: self, volumeThreshold: 25.0)
+        self.mic = MicDetection(delegate: self, volumeThreshold: 20.0)
         self.timerVoiceOver1.start()
     }
     
@@ -348,11 +348,22 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         }else if playingState == .voiceOver2 || playingState == .blowDetecting{
             if message.position.x > -70 && !messageChanged{
                 messageChanged = true
-                self.messageParticle!.changeLine(strokeColor: .white, lineWidth: 25, glowWidth: 30)
-                
+                self.messageParticle!.changeLine(strokeColor: .black, lineWidth: 25, glowWidth: 30)
+                SoundManager.sharedInstance().playSoundEffect(.messageMess, mustLoop: false)
+            }
+            if message.position.x > 480{
+                message.stopRender(duration: 0.0)
+                message.position.x -= 10
+                message.removeFromParent()
+                SoundManager.sharedInstance().playSoundEffect(.darwinNo, mustLoop: false)
             }
         }else{
-            
+            if message.position.x > 480{
+                message.stopRender(duration: 0.0)
+                message.position.x -= 10
+                message.removeFromParent()
+                SoundManager.sharedInstance().playSoundEffect(.darwinYes, mustLoop: false)
+            }
         }
     }
     
