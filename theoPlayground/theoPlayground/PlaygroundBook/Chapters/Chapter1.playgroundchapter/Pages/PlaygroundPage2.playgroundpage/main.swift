@@ -2,7 +2,7 @@
  
  # The Wall
  - Note:
- Bowe got upsed with something Darwin said. He wants to start a conversation about it, but...
+ Bowe got upset with something Darwin said. He wants to start a conversation about it, but...
 
  In many life situations, opening yourself to someone might feel very threatening. Your mind creates insecurities to stop you, like a giant wall that blocks every attempt of communication. Keeping things to yourself may seem easier, but we know it's not worth it.
 
