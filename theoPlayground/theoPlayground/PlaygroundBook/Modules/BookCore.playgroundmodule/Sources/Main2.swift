@@ -74,7 +74,7 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         self.hideUI()
         self.boweIdleTalk()
         Animator.animateDarwin(node: self.darwinNode, animation: .idle, mustLoop: true){}
-        SoundManager.sharedInstance().playBackgroundMusic(.minigame2, mustLoop: false)
+        SoundManager.sharedInstance().playBackgroundMusic(.page2, mustLoop: false)
         self.shake = ShakeDetection(delegate: self)
         self.mic = MicDetection(delegate: self, volumeThreshold: 20.0)
         self.timerVoiceOver1.start()

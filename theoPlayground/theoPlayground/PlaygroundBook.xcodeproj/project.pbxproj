@@ -36,6 +36,8 @@
 		5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2F9AD2054BBF300191409 /* LiveViewController.swift */; };
 		5EF2F9B72054E6FB00191409 /* Chapters in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5EF2F9B62054E6F900191409 /* Chapters */; };
 		E40DAE7C262E505B0093B511 /* capa playground.png in Resources */ = {isa = PBXBuildFile; fileRef = E40DAE7B262E505B0093B511 /* capa playground.png */; };
+		E40DAE8A262E78F80093B511 /* minigame3 music 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E40DAE89262E78F80093B511 /* minigame3 music 1.0.mp3 */; };
+		E40DAE90262E79020093B511 /* page3 music 1.0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E40DAE8F262E79020093B511 /* page3 music 1.0.mp3 */; };
 		E47AC01F262888CA00D60C44 /* MicDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC01E262888CA00D60C44 /* MicDetection.swift */; };
 		E47AC02A2628A68B00D60C44 /* Main1.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC0292628A68B00D60C44 /* Main1.swift */; };
 		E47AC0502628E4D300D60C44 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC04F2628E4D300D60C44 /* Animator.swift */; };
@@ -209,6 +211,8 @@
 		5EF2F9AD2054BBF300191409 /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		5EF2F9B62054E6F900191409 /* Chapters */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Chapters; sourceTree = "<group>"; };
 		E40DAE7B262E505B0093B511 /* capa playground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "capa playground.png"; sourceTree = "<group>"; };
+		E40DAE89262E78F80093B511 /* minigame3 music 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "minigame3 music 1.0.mp3"; sourceTree = "<group>"; };
+		E40DAE8F262E79020093B511 /* page3 music 1.0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "page3 music 1.0.mp3"; sourceTree = "<group>"; };
 		E47AC01E262888CA00D60C44 /* MicDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicDetection.swift; sourceTree = "<group>"; };
 		E47AC0292628A68B00D60C44 /* Main1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main1.swift; sourceTree = "<group>"; };
 		E47AC04F2628E4D300D60C44 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
@@ -495,6 +499,7 @@
 		E47AC0972629D27300D60C44 /* Audio Files */ = {
 			isa = PBXGroup;
 			children = (
+				E40DAE8F262E79020093B511 /* page3 music 1.0.mp3 */,
 				E47AC0B5262B641A00D60C44 /* minigame 3 */,
 				E47AC0982629F58200D60C44 /* minigame 2 */,
 			);
@@ -517,6 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				E47AC0B6262B642600D60C44 /* minigame3 darwinNo 1.0.mp3 */,
+				E40DAE89262E78F80093B511 /* minigame3 music 1.0.mp3 */,
 				E47AC0B7262B642600D60C44 /* minigame3 darwinYes 1.0.mp3 */,
 				E47AC0B9262B642700D60C44 /* minigame3 messageBlock 1.0.mp3 */,
 				E47AC0BD262B642800D60C44 /* minigame3 messageClear 1.0.mp3 */,
@@ -695,6 +701,7 @@
 				E47AC0C5262B642800D60C44 /* minigame3 wallHit 1.0.mp3 in Resources */,
 				E47AC09F2629F58200D60C44 /* minigame2 BoweScream 1.0.mp3 in Resources */,
 				E47AC0A02629F58200D60C44 /* minigame2 music 1.3.mp3 in Resources */,
+				E40DAE90262E79020093B511 /* page3 music 1.0.mp3 in Resources */,
 				E47AC0C0262B642800D60C44 /* minigame3 darwinNo 1.0.mp3 in Resources */,
 				E47AC0C3262B642800D60C44 /* minigame3 messageBlock 1.0.mp3 in Resources */,
 				0D81E92F2624CA0E0084A24C /* LiveView3.sks in Resources */,
@@ -716,6 +723,7 @@
 				5E551EC52371FC3F00784365 /* Assets.xcassets in Resources */,
 				0D81E93B2624CA5C0084A24C /* Main3.sks in Resources */,
 				5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */,
+				E40DAE8A262E78F80093B511 /* minigame3 music 1.0.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

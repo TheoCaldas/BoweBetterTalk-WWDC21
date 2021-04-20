@@ -11,6 +11,6 @@ import SpriteKit
 
 public class Main3 : SKScene {
     public override func didMove(to view: SKView) {
-        SoundManager.sharedInstance().playBackgroundMusic(.minigame2, mustLoop: false)
+        SoundManager.sharedInstance().playBackgroundMusic(.page3, mustLoop: false)
     }
 }

@@ -9,7 +9,9 @@ import Foundation
 import AVFoundation
 
 public enum BackgroundMusic: String {
-    case minigame2 = "minigame2 music 1.3.mp3"
+    case page1 = "minigame2 music 1.3.mp3"
+    case page2 = "minigame3 music 1.0.mp3"
+    case page3 = "page3 music 1.0.mp3"
 }
 
 public enum SFX: String, CaseIterable{
