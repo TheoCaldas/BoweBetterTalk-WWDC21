@@ -31,7 +31,7 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
     
     private var mic: MicDetection?
     private var currentScreamAmount: Float = .zero
-    private let screamAmountTarget: Float = 10.0
+    private let screamAmountTarget: Float = 4.0
     
     private var playingState: PlayingState = .voiceOver1
     private var timerVoiceOver1 = TimeCounter()
@@ -76,7 +76,7 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         Animator.animateDarwin(node: self.darwinNode, animation: .idle, mustLoop: true){}
         SoundManager.sharedInstance().playBackgroundMusic(.minigame2, mustLoop: false)
         self.shake = ShakeDetection(delegate: self)
-        self.mic = MicDetection(delegate: self, volumeThreshold: 25.0)
+        self.mic = MicDetection(delegate: self, volumeThreshold: 20.0)
         self.timerVoiceOver1.start()
     }
     
@@ -94,9 +94,9 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
             }
         }
         if self.playingState == .voiceOver2{
-            if self.timerVoiceOver2.getTime() >= 2.0 && self.timerVoiceOver2.getTime() < 3.0{
+            if self.timerVoiceOver2.getTime() >= 1.5 && self.timerVoiceOver2.getTime() < 2.0{
                 SoundManager.sharedInstance().playSoundEffect(.minigame3VoiceOver2, mustLoop: false)
-            }else if self.timerVoiceOver2.getTime() >= 7.0{
+            }else if self.timerVoiceOver2.getTime() >= 5.5{
                 self.startGame2()
             }
         }
@@ -104,7 +104,7 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
             self.updateWall()
         }
         if self.playingState == .shakeDetecting || self.playingState == .blowDetecting{
-            if self.timerHint.getTime() >= 5.0{
+            if self.timerHint.getTime() >= 3.0{
                 self.showHint()
             }
         }
@@ -155,8 +155,8 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
         self.mic?.startRecorder()
         self.showUI(.mic)
         self.timerHint.start()
-        SoundManager.sharedInstance().changeVolumeBackgroundMusic(volume: 0.3)
-        SoundManager.sharedInstance().changeVolumeSFX(volume: 0.3)
+        SoundManager.sharedInstance().changeVolumeBackgroundMusic(volume: 0.1)
+        SoundManager.sharedInstance().changeVolumeSFX(volume: 0.1)
     }
     
     private func endGame2(){
@@ -202,7 +202,7 @@ public class Main2: SKScene, ShakeDelegate, MicDelegate {
             if !self.hint2HasAppeared{
                 self.hint2HasAppeared = true
                 SoundManager.sharedInstance().playSoundEffect(.hint, mustLoop: false)
-                PlaygroundPage.current.assessmentStatus = .fail(hints: ["Blow the communication noises away!"], solution: nil)
+                PlaygroundPage.current.assessmentStatus = .fail(hints: ["Give a strong blown close to the screen!"], solution: nil)
             }
         }
     }

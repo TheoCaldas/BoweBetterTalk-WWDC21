@@ -20,7 +20,7 @@ public class Main1: SKScene, MicDelegate {
     
     private var mic: MicDetection?
     private var currentScreamAmount: Float = .zero
-    private let screamAmountTarget: Float = 15.0
+    private let screamAmountTarget: Float = 10.0
     
     private var playingState: PlayingState = .notStarted
     private var timeSinceLastDetection = TimeCounter()
@@ -75,7 +75,7 @@ public class Main1: SKScene, MicDelegate {
             }
         }
         if self.playingState == .started{
-            if self.timeBeforeFirstDetection.getTime() >= 15.0{
+            if self.timeBeforeFirstDetection.getTime() >= 13.0{
                 self.showHint()
             }
         }
@@ -86,7 +86,7 @@ public class Main1: SKScene, MicDelegate {
             if self.timeSinceLastDetection.getTime() >= 0.1 {
                 self.interruptScream()
             }
-            if self.timeSinceLastDetection.getTime() >= 5.0{
+            if self.timeSinceLastDetection.getTime() >= 3.0{
                 self.showHint()
             }
         }
