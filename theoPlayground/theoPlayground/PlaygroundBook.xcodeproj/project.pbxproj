@@ -35,6 +35,7 @@
 		5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EF2F97E2054B6E400191409 /* ManifestPlist.strings */; };
 		5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2F9AD2054BBF300191409 /* LiveViewController.swift */; };
 		5EF2F9B72054E6FB00191409 /* Chapters in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5EF2F9B62054E6F900191409 /* Chapters */; };
+		E40DAE7C262E505B0093B511 /* capa playground.png in Resources */ = {isa = PBXBuildFile; fileRef = E40DAE7B262E505B0093B511 /* capa playground.png */; };
 		E47AC01F262888CA00D60C44 /* MicDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC01E262888CA00D60C44 /* MicDetection.swift */; };
 		E47AC02A2628A68B00D60C44 /* Main1.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC0292628A68B00D60C44 /* Main1.swift */; };
 		E47AC0502628E4D300D60C44 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47AC04F2628E4D300D60C44 /* Animator.swift */; };
@@ -207,6 +208,7 @@
 		5EF2F9AB2054BBF300191409 /* libBookCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBookCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF2F9AD2054BBF300191409 /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		5EF2F9B62054E6F900191409 /* Chapters */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Chapters; sourceTree = "<group>"; };
+		E40DAE7B262E505B0093B511 /* capa playground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "capa playground.png"; sourceTree = "<group>"; };
 		E47AC01E262888CA00D60C44 /* MicDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicDetection.swift; sourceTree = "<group>"; };
 		E47AC0292628A68B00D60C44 /* Main1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main1.swift; sourceTree = "<group>"; };
 		E47AC04F2628E4D300D60C44 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 		5EF2F9792054B64800191409 /* PrivateResources */ = {
 			isa = PBXGroup;
 			children = (
+				E40DAE7B262E505B0093B511 /* capa playground.png */,
 				E47AC0972629D27300D60C44 /* Audio Files */,
 				5EF2F97E2054B6E400191409 /* ManifestPlist.strings */,
 				5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */,
@@ -709,6 +712,7 @@
 				E47AC0C2262B642800D60C44 /* minigame3 voiceOver1 1.0.mp3 in Resources */,
 				E47AC0C7262B642800D60C44 /* minigame3 messageClear 1.0.mp3 in Resources */,
 				0D81E9192624C02C0084A24C /* Main2.sks in Resources */,
+				E40DAE7C262E505B0093B511 /* capa playground.png in Resources */,
 				5E551EC52371FC3F00784365 /* Assets.xcassets in Resources */,
 				0D81E93B2624CA5C0084A24C /* Main3.sks in Resources */,
 				5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */,
