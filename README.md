@@ -15,7 +15,7 @@ Cutscene made with Hype4.
 Visual assets made with Adobe Photoshop.
 Audio assets made with macOS GarageBand.
 
-Check it out on Youtube: lkjlkjelfskjelj
+Check it out on [Youtube](https://youtu.be/7Y4D_xJ7EwU)!
 
 ## The code
 
